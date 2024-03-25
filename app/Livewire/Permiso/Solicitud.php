@@ -21,20 +21,26 @@ class Solicitud extends Component
 
     function setEstado($id, $estado) : void {
 
-        $datos = [];
-
-        if($estado == 2 || $estado == 3 || $estado == 6){
-            $datos['autorizaId'] = auth()->user()->id;
-            $datos['fechaHoraAutoriza'] = now();
-        }else if($estado == 4){
-            $datos['responsableSalidaId'] = auth()->user()->id;
-            $datos['fechaHoraSalida'] = now();
-        }else if($estado == 5){
-            $datos['responsableRetornoId'] = auth()->user()->id;
-            $datos['fechaHoraRetorno'] = now();
+        $permiso = Permiso::find($id);
+        if(auth()->user()->id == $permiso->empleadoId && $estado != 6){
+            $this->dispatch('alert', ['type' => 'error', 'message' => 'No puedes actualizar tu propio permiso']);
+        }else{
+            $datos = [];
+    
+            if($estado == 2 || $estado == 3 || $estado == 6){
+                $datos['autorizaId'] = auth()->user()->id;
+                $datos['fechaHoraAutoriza'] = now();
+            }else if($estado == 4){
+                $datos['responsableSalidaId'] = auth()->user()->id;
+                $datos['fechaHoraSalida'] = now();
+            }else if($estado == 5){
+                $datos['responsableRetornoId'] = auth()->user()->id;
+                $datos['fechaHoraRetorno'] = now();
+            }
+            
+            Permiso::where('id', $id)->update(array_merge($datos, ['estadoId' => $estado]));
         }
-        
-        Permiso::where('id', $id)->update(array_merge($datos, ['estadoId' => $estado]));
+
     }
 
     public function render()
@@ -43,7 +49,7 @@ class Solicitud extends Component
         $empleado = $user->empleado;
 
         $permisosIds = $user->getAllPermissions()->pluck('id')->toArray();
-        if (count(array_intersect($permisosIds, [1,2,3])) > 0) {
+        if (count(array_intersect($permisosIds, [1,2,3,4])) > 0) {
             $permisos = Permiso::with('empleado', 'departamento','servicio', 'tipo')
                                 ->orderBy('id', 'desc')
                                 ->whereHas('empleado', function($e) use ($user, $empleado){
@@ -60,6 +66,9 @@ class Solicitud extends Component
             $permisos = collect();
         }
 
-        return view('livewire.permiso.solicitud', compact('permisos'));
+        $botonAprueba = (bool) count(array_intersect($permisosIds, [1,2,3]));
+        $botonHora = in_array(4, $permisosIds);
+
+        return view('livewire.permiso.solicitud', compact('permisos', 'botonAprueba', 'botonHora'));
     }
 }

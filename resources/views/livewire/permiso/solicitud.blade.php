@@ -52,7 +52,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    @if ($item->estadoId == 1)
+                                                    @if ($item->estadoId == 1 && $botonAprueba)
                                                         <button type="button" 
                                                             class="btn btn-icon btn-flat-primary waves-effect" 
                                                             title="Aprobar"
@@ -68,7 +68,7 @@
                                                             <x-icon icon="xmark"/>
                                                         </button>
                                                     @endif
-                                                    @if ($item->estadoId == 2)
+                                                    @if ($item->estadoId == 2 && $botonHora)
                                                         <button type="button" 
                                                             class="btn btn-icon btn-flat-info waves-effect" 
                                                             title="Hora de salida"
@@ -78,7 +78,7 @@
                                                             Salida
                                                         </button>
                                                     @endif
-                                                    @if ($item->estadoId == 4)
+                                                    @if ($item->estadoId == 4 && $botonHora)
                                                         <button type="button" 
                                                             class="btn btn-icon btn-flat-info waves-effect" 
                                                             title="Hora de retorno"
@@ -90,7 +90,7 @@
                                                     @endif
                                                     
                                                     
-                                                    @if (!in_array($item->estadoId, [3,5,6]))
+                                                    @if (!in_array($item->estadoId, [3,5,6]) && $botonAprueba)
                                                         <button type="button" 
                                                             class="btn btn-icon btn-flat-dark waves-effect" 
                                                             title="Anular"
