@@ -21,7 +21,7 @@
                         <table class="table table-sm">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Fecha/Hora</th>
+                                    <th>Fecha</th>
                                     <th>Nombres</th>
                                     <th>Tipo</th>
                                     <th>Departamento</th>
@@ -52,6 +52,13 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group">
+                                                    <button type="button" 
+                                                            class="btn btn-icon btn-flat-success waves-effect" 
+                                                            title="Detalles"
+                                                            wire:click="$dispatchTo('permiso.form-detalle', 'muestra-modal', { id: {{ $item->id }} })"
+                                                        >
+                                                            <x-icon icon="list"/>
+                                                        </button>
                                                     @if ($item->estadoId == 1 && $botonAprueba)
                                                         <button type="button" 
                                                             class="btn btn-icon btn-flat-primary waves-effect" 
@@ -118,6 +125,7 @@
             </div>
         </div>
     </div>
+    @livewire('permiso.form-detalle')
 </x-content-body>
 
 @push('scripts')
