@@ -34,7 +34,9 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             RolMenuSeeder::class,
             TipoPermisoSeeder::class,
-            EstadoPermisoSeeder::class
+            EstadoPermisoSeeder::class,
+            EstadoRolSeeder::class,
+            TurnoSeeder::class,
         ]);
     }
 }

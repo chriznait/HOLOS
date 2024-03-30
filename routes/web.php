@@ -32,7 +32,11 @@ Route::group(['middleware'=> 'auth'],function() {
     Route::get('perfil', Perfil::class)->name('perfil');
 
     Route::get('inicio', Inicio::class)->name('inicio');
-
+    
+    Route::prefix('rol')->group(function () {
+        Route::get('general', App\Livewire\Rol\General::class)->name('rol.general');
+        Route::get('administracion', App\Livewire\Rol\Administracion::class)->name('rol.administracion');
+    });
     Route::prefix('configuracion')->group(function () {
         Route::get('departamento', Departamento::class)->name('configuracion.departamento');
         Route::get('servicio', Servicio::class)->name('configuracion.servicio');

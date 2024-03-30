@@ -46,11 +46,34 @@ class MenuSeeder extends Seeder
                 ]
             ],
             [
+                'name' => 'Roles',
+                'routeName' => 'rol',
+                'slug' => 'rol',
+                'icon' => 'list',
+                'order' => 3,
+                'children' => [
+                    [
+                        'name' => 'Roles General',
+                        'routeName' => 'rol.general',
+                        'slug' => 'rol/general',
+                        'icon' => 'circle',
+                        'order' => 1,
+                    ],
+                    [
+                        'name' => 'Administracion Roles',
+                        'routeName' => 'rol.administracion',
+                        'slug' => 'rol/administracion',
+                        'icon' => 'circle',
+                        'order' => 2,
+                    ],
+                ]
+            ],
+            [
                 'name' => 'Administración',
                 'routeName' => 'administracion',
                 'slug' => 'administracion',
                 'icon' => 'users',
-                'order' => 3,
+                'order' => 4,
                 'children' => [
                     [
                         'name' => 'Roles',
@@ -73,7 +96,7 @@ class MenuSeeder extends Seeder
                 'routeName' => 'configuracion',
                 'slug' => 'configuracion',
                 'icon' => 'bar-chart',
-                'order' => 4,
+                'order' => 5,
                 'children' => [
                     [
                         'name' => 'Departamentos',
