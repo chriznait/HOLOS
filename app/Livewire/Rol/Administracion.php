@@ -4,7 +4,9 @@ namespace App\Livewire\Rol;
 
 use App\Models\DepartamentoHospital;
 use App\Models\Rol;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,12 +18,12 @@ class Administracion extends Component
     public $departamentos, $servicios, $anios, $meses;
 
     function mount() : void {
-        $this->tituloPagina = "Gestión de Roles";
-        $this->filMes = (int) date('m');
-        $this->filAnio = (int) date('Y');
-        $this->filDepartamento = "";
-        $this->user = auth()->user();
-        $this->empleado = auth()->user()->empleado;
+        $this->tituloPagina         = "Gestión de Roles";
+        $this->filMes               = (int) date('m');
+        $this->filAnio              = (int) date('Y');
+        $this->filDepartamento      = "";
+        $this->user                 = User::find(auth()->user()->id);
+        $this->empleado             = $this->user->empleado;
         $this->reseteaData();   
 
         if($this->user->hasPermissionTo(5)){
@@ -79,31 +81,45 @@ class Administracion extends Component
     }
     function guardar() : void {
         $this->validate();
-
-        DB::beginTransaction();
-
-        try {
-
-            if(!is_null($this->rol->id) && $this->rol->id != ""){
-                $message = "Actualizado con exito";
-            }else{
-                $message = "Registrado con exito";
-                $this->rol->estadoId = 1;
-                $this->rol->registraId = $this->empleado->id;
+        $existe = Rol::where([
+                        'anio' => $this->rol->anio,
+                        'mes' => $this->rol->mes,
+                        'departamentoId' => $this->rol->departamentoId,
+                        'servicioId' => $this->rol->servicioId
+                    ])
+                    ->when(!is_null($this->rol->id) && !empty($this->rol->id), function($q){
+                        $q->where('id', '<>', $this->rol->id);
+                    })->exists();
+        if(!$existe){
+            DB::beginTransaction();
+    
+            try {
+    
+                if(!is_null($this->rol->id) && $this->rol->id != ""){
+                    $message = "Actualizado con exito";
+                }else{
+                    $message = "Registrado con exito";
+                    $this->rol->estadoId = 1;
+                    $this->rol->registraId = $this->empleado->id;
+                }
+                $this->rol->save();
+    
+                $resp["type"] = 'success';
+                $resp["message"] = $message;
+    
+                DB::commit();
+                
+                $this->cierraModal();
+            } catch (\Exception $e) {
+                DB::rollback();
+                $resp["type"] = 'error';
+                $resp["message"] = 'No se pudo guardar los datos'. $e->getMessage();
             }
-            $this->rol->save();
-
-            $resp["type"] = 'success';
-            $resp["message"] = $message;
-
-            DB::commit();
-            
-            $this->cierraModal();
-        } catch (\Exception $e) {
-            DB::rollback();
+        }else{
             $resp["type"] = 'error';
-            $resp["message"] = 'No se pudo guardar los datos'. $e->getMessage();
+            $resp["message"] = 'Ya existe un rol con los mismos datos';
         }
+
         $this->dispatch('alert', $resp);
     }
     function eliminar($id){
@@ -129,6 +145,8 @@ class Administracion extends Component
         }
         $this->dispatch('alert', $resp);        
     }
+    #[On('refresh')]
+    function refresh() : void {}
     public function render()
     {
         $rolesGeneral = $this->user->hasPermissionTo(5);

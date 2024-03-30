@@ -22,6 +22,25 @@ class Rol extends Model
         return $this->hasOne(Servicio::class, 'id', 'servicioId');
     }
     function mes(){
-        return getMeses()[$this->attributes['mes']];
+        if(isset($this->attributes['mes'])){
+            return getMeses()[$this->attributes['mes']];
+        }
+        return "";
+    }
+    function registradoPor(): HasOne{
+        return $this->hasOne(Empleado::class, 'id', 'registraId');
+    }
+    function revisadoPor(): HasOne{
+        return $this->hasOne(Empleado::class, 'id', 'revisaId');
+    }
+    function fechaCreacion() : string {
+        if(isset($this->attributes['created_at']))
+            return date('d/m/Y H:i', strtotime($this->attributes['created_at']));
+        return "";
+    }
+    function fechaRevision() : string {
+        if(isset($this->attributes['fechaHoraRevisa']))
+            return date('d/m/Y H:i', strtotime($this->attributes['fechaHoraRevisa']));
+        return "";
     }
 }

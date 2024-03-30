@@ -11,7 +11,6 @@
                 {{ $slot }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-relief-secondary waves-effect" data-bs-dismiss="modal">Cerrar</button>
                 @isset($modalFooter)
                     {{ $modalFooter }}
                 @else
@@ -20,6 +19,7 @@
                         <span class="ml-25 align-middle">Guardar</span>
                     </button>
                 @endisset
+                <button type="button" class="btn btn-relief-secondary waves-effect" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

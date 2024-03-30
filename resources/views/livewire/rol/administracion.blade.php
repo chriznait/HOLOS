@@ -68,6 +68,13 @@
                                                 <span class="{{ $item->estado->class }}">{{ $item->estado->descripcion }}</span>
                                             </td>
                                             <td>
+                                                <button type="button" 
+                                                    class="btn btn-icon btn-flat-primary waves-effect" 
+                                                    title="Editar"
+                                                    wire:click="$dispatchTo('rol.detalle-rol', 'muestraDetalle', { id: {{ $item->id }} })"
+                                                >
+                                                    <i class="fa-solid fa-list"></i>
+                                                </button>
                                                 @if ($empleado->id == $item->registraId && $item->estadoId == 1)
                                                     <div class="btn-group">
                                                         <button type="button" 
@@ -133,6 +140,7 @@
             model="rol.observacion" 
             wire:model='rol.observacion'/>
     </x-modal>
+    @livewire('rol.detalle-rol')
 </x-content-body>
 
 @push('scripts')
