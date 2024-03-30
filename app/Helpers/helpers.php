@@ -62,5 +62,36 @@ if(!function_exists('trimString')){
         return $cadena;
     }
 }
-
+if(!function_exists('getMeses')){
+    function getMeses(): array{
+        $meses = [
+            1 => 'Enero', 
+            2 => 'Febrero', 
+            3 => 'Marzo', 
+            4 => 'Abril', 
+            5 => 'Mayo', 
+            6 => 'Junio',
+            7 => 'Julio', 
+            8 => 'Agosto', 
+            9 => 'Septiembre', 
+            10 => 'Octubre', 
+            11 => 'Noviembre', 
+            12 => 'Diciembre'
+        ];
+        return $meses;
+    }
+}
+if(!function_exists('getAnios')){
+    function getAnios(): array{
+        $anioInicial = 2024;
+        $anioActual = (int) date('Y');
+        $mesActual = (int) date('m');
+        $rango = $mesActual == 12 ? 2 : 1;
+        $anios = [];
+        for ($i=$anioInicial; $i < $anioActual + $rango; $i++) { 
+            $anios[$i] = $i;
+        }
+        return $anios;
+    }
+}
     

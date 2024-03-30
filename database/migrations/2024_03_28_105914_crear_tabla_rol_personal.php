@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('estadoId');
             $table->integer('anio');
             $table->integer('mes');
+            $table->text('observacion')->nullable()->default(null);
+            $table->text('validacion')->nullable()->default(null);
             $table->unsignedBigInteger('registraId');
             $table->unsignedBigInteger('revisaId')->nullable()->default(null);
             $table->dateTime('fechaHoraRevisa')->nullable()->default(null);

@@ -34,6 +34,10 @@ class RolesSeeder extends Seeder
         $permisoAutorizaDepartamento    = Permission::create(['name' => 'permiso autoriza departamento']);
         $permisoAutorizaGeneral         = Permission::create(['name' => 'permiso autoriza general']);
         $permisoAsignaSalidaRetorno     = Permission::create(['name' => 'permiso asigna salida/retorno']);
+        /* $permisoregistraRol             = Permission::create(['name' => 'rol registra']); */
+        $permisoRevisaRol               = Permission::create(['name' => 'rol revisa']);
+
+        $administrador->syncPermissions([$permisoAutorizaGeneral, $permisoAsignaSalidaRetorno, $permisoRevisaRol]);
 
 
     }
