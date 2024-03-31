@@ -10,6 +10,7 @@ use App\Livewire\Permiso\FormSolicitud;
 use App\Livewire\Permiso\MisPermisos;
 use App\Livewire\Permiso\Solicitud;
 use Illuminate\Support\Facades\Route;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('excel', function(){
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="myfile.xlsx"');
+    header('Cache-Control: max-age=0');
+
+    $spreadsheet = new Spreadsheet();
+    $activeWorksheet = $spreadsheet->getActiveSheet();
+    $activeWorksheet->setCellValue('A1', 'Hello World !');
+
+    $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $writer->save('php://output');
 });
 
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');

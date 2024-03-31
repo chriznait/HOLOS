@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('profesionId');
             $table->timestamps();
 
-            $table->foreign('rolId')->references('id')->on('rol_personal');
+            $table->foreign('rolId')->references('id')->on('rol_personal')->onDelete('cascade');
             $table->foreign('empleadoId')->references('id')->on('empleado');
             $table->foreign('tipoContratoId')->references('id')->on('tipo_contrato');
             $table->foreign('cargoId')->references('id')->on('cargo');

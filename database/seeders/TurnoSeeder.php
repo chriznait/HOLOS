@@ -17,34 +17,42 @@ class TurnoSeeder extends Seeder
             [
                 'abrev' => 'M',
                 'horas' => 6,
+                'descripcion' => 'Mañana'
             ],
             [
                 'abrev' => 'T',
                 'horas' => 6,
+                'descripcion' => 'Tarde'
             ],
             [
                 'abrev' => 'MT',
                 'horas' => 12,
+                'descripcion' => 'Mañana y tarde'
             ],
             [
                 'abrev' => 'GD',
                 'horas' => 12,
+                'descripcion' => 'Guardia dia'
             ],
             [
                 'abrev' => 'GN',
                 'horas' => 12,
+                'descripcion' => 'Guardia noche'
             ],
             [
                 'abrev' => 'N',
                 'horas' => 12,
+                'descripcion' => 'Noche'
             ],
             [
                 'abrev' => 'MTN',
-                'horas' => 18,
+                'horas' => 24,
+                'descripcion' => 'Mañana, tarde y noche'
             ],
             [
                 'abrev' => 'GDN',
                 'horas' => 24,
+                'descripcion' => 'Guardia dia y guardia noche'
             ],
         ];
 

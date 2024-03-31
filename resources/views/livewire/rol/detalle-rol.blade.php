@@ -57,6 +57,36 @@
                 </tr>
             </tbody>
         </table>
+        <div class="btn-group">
+            <button class="btn btn-flat-dark" wire:click="descargarFormato"wire:loading.attr="disabled">
+                <span wire:loading wire:target="descargarFormato" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <i class="fa-solid fa-file-arrow-down"></i>
+                Descargar formato
+            </button>
+            <button class="btn btn-flat-dark" wire:click="$dispatchTo('rol.subir-rol', 'muestraSubirRol', { id: {{ $rol->id }} })">
+                <i class="fa-solid fa-file-arrow-up"></i>
+                Subir Formato
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th rowspan="2">DNI</th>
+                        <th rowspan="2">NOMBRES</th>
+                        @foreach ($diasMes as $i => $dia)
+                            <th>{{ $i }}</th>
+                        @endforeach
+                        <th rowspan="2">Total</th>
+                    </tr>
+                    <tr>
+                        @foreach ($diasMes as $i => $dia)
+                            <th>{{ $dia['inicial'] }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
     @slot('modalFooter')
         <div x-data="counter">

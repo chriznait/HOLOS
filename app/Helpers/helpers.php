@@ -94,4 +94,31 @@ if(!function_exists('getAnios')){
         return $anios;
     }
 }
+if(!function_exists('numeroLetra')){
+    function numeroLetra($columnNumber) : string{
+        $letters = '';
+        while ($columnNumber > 0) {
+            $remainder = ($columnNumber - 1) % 26;
+            $letters = chr(65 + $remainder) . $letters;
+            $columnNumber = (int)(($columnNumber - $remainder) / 26);
+        }
+        return $letters;
+    }
+}
+if(!function_exists('getDiasMes')){
+    function getDiasMes($anio, $mes) : array{
+        $date = Carbon::create($anio, $mes, 1);
+
+        $numDays = $date->daysInMonth;
+        $resp = [];
+        for ($i=1; $i <= $numDays ; $i++) { 
+            $dia = ucwords(Carbon::create($anio, $mes, $i)->translatedFormat('l'));
+            $resp[$i] = [
+                'dia' => $dia,
+                'inicial' => $dia[0]
+            ];
+        }
+        return $resp;
+    }
+}
     

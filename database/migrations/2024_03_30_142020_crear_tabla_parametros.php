@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rol_personal_detalle', function (Blueprint $table) {
+        Schema::create('parametros', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('rolEmpleadoId');
-            $table->string('turno', 10);
-            $table->tinyInteger('dia');
+            $table->string('descripcion');
+            $table->string('valor');
             $table->timestamps();
-
-            $table->foreign('rolEmpleadoId')->references('id')->on('rol_personal_empleado')->onDelete('cascade');
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rol_personal_detalle');
+        Schema::dropIfExists('parametros');
     }
 };

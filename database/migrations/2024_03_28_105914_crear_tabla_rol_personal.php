@@ -23,6 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('registraId');
             $table->unsignedBigInteger('revisaId')->nullable()->default(null);
             $table->dateTime('fechaHoraRevisa')->nullable()->default(null);
+            $table->string('filePath')->nullable()->default(null);
+            $table->string('fileName')->nullable()->default(null);
             
             $table->timestamps();
 

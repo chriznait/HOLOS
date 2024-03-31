@@ -141,6 +141,7 @@
             wire:model='rol.observacion'/>
     </x-modal>
     @livewire('rol.detalle-rol')
+    @livewire('rol.subir-rol')
 </x-content-body>
 
 @push('scripts')
