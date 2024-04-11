@@ -16,7 +16,7 @@ class ParametrosSeeder extends Seeder
         $datos = [
             [
                 'descripcion' => 'nombre de institucion',
-                'valor' => 'Hospital Mollendo'
+                'valor' => 'HOSPITAL ALTO INCLAN'
             ],
             [
                 'descripcion' => 'direccion',

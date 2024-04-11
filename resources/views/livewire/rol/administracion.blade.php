@@ -65,7 +65,9 @@
                                             <td>{{ $item->departamento->descripcion }}</td>
                                             <td>{{ $item->servicio->descripcion }}</td>
                                             <td>
-                                                <span class="{{ $item->estado->class }}">{{ $item->estado->descripcion }}</span>
+                                                @if (!is_null($item->estadoId))
+                                                    <span class="{{ $item->estado->class }}">{{ $item->estado->descripcion }}</span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <button type="button" 
@@ -75,7 +77,7 @@
                                                 >
                                                     <i class="fa-solid fa-list"></i>
                                                 </button>
-                                                @if ($empleado->id == $item->registraId && $item->estadoId == 1)
+                                                @if ($empleado->id == $item->registraId && (is_null($item->revisaId) || is_null($item->estadoId)))
                                                     <div class="btn-group">
                                                         <button type="button" 
                                                             class="btn btn-icon btn-flat-success waves-effect" 
@@ -141,7 +143,7 @@
             wire:model='rol.observacion'/>
     </x-modal>
     @livewire('rol.detalle-rol')
-    @livewire('rol.subir-rol')
+    
 </x-content-body>
 
 @push('scripts')

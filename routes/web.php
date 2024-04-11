@@ -26,7 +26,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('excel', function(){
+/* Route::get('excel', function(){
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment;filename="myfile.xlsx"');
     header('Cache-Control: max-age=0');
@@ -37,7 +37,7 @@ Route::get('excel', function(){
 
     $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
     $writer->save('php://output');
-});
+}); */
 
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
 
@@ -49,6 +49,8 @@ Route::group(['middleware'=> 'auth'],function() {
     Route::prefix('rol')->group(function () {
         Route::get('general', App\Livewire\Rol\General::class)->name('rol.general');
         Route::get('administracion', App\Livewire\Rol\Administracion::class)->name('rol.administracion');
+
+        Route::get('pdf/{idRol}', [App\Http\Controllers\RolController::class, 'pdf'])->name('rol.pdf');
     });
     Route::prefix('configuracion')->group(function () {
         Route::get('departamento', Departamento::class)->name('configuracion.departamento');

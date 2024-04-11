@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "codedge/laravel-fpdf": "^1.12",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/fortify": "^1.21",
         "laravel/framework": "^10.10",
@@ -31,7 +32,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Helpers/helpers.php"
+            "app/Helpers/helpers.php",
+            "app/Helpers/CustomPdf.php"
         ]
     },
     "autoload-dev": {

@@ -99,7 +99,6 @@ class Administracion extends Component
                     $message = "Actualizado con exito";
                 }else{
                     $message = "Registrado con exito";
-                    $this->rol->estadoId = 1;
                     $this->rol->registraId = $this->empleado->id;
                 }
                 $this->rol->save();
@@ -147,6 +146,12 @@ class Administracion extends Component
     }
     #[On('refresh')]
     function refresh() : void {}
+
+    /* #[On('abrirModalEstado')]
+    function abrirModalEstado($idRol, $idEstado) : void {
+        $this->dispatch('openModal', $this->idModalEstado);
+    } */
+
     public function render()
     {
         $rolesGeneral = $this->user->hasPermissionTo(5);

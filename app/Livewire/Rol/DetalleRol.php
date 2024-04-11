@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Rol;
 
+use App\Models\EstadoRol;
 use App\Models\Rol;
 use App\Models\Turno;
 use Livewire\Attributes\On;
@@ -13,15 +14,21 @@ class DetalleRol extends Component
 {
     public $tituloModal, $idModal;
     public $rol, $diasMes;
+    public $tituloModalEstado, $idModalEstado;
 
     function mount() : void {
+        $this->tituloModalEstado    = "Actualiza estado";
+        $this->idModalEstado        = "mdl-actualiza-estado";
+
+
         $this->tituloModal = "Detalle Rol";
         $this->idModal = "mdl-rol-detalle";
         $this->rol = new Rol();
         $this->diasMes = [];
     }
+    #[On('inicializaDatos')]
     function inicializaDatos($id) : void {
-        $this->rol = Rol::find($id);
+        $this->rol = Rol::with('empleados.detalles.rTurno')->find($id);
         $this->diasMes = getDiasMes($this->rol->anio, $this->rol->mes);
     }
     #[On('muestraDetalle')]
@@ -155,11 +162,59 @@ class DetalleRol extends Component
         // Devolver el archivo como respuesta HTTP
         return response()->streamDownload(function () use ($content) {
             echo $content;
-        }, 'archivo_generado.xlsx');
+        }, 'rol '.$rol->mes().'.xlsx');
     }
     function modalSubirRol() : void {
         $this->dispatch('openModal', 'mdl-upload-rol');
     }
+
+    function abrirModalEstado($idEstado) : void {
+        $estado = EstadoRol::find($idEstado);
+        $this->rol->estadoId = $idEstado;
+        $this->tituloModalEstado = "¿Seguro que desea cambiar estado del rol a ".$estado->descripcion."?";
+        $this->dispatch('openModal', $this->idModalEstado);
+    }
+    function rules() : array {
+        return [
+            'rol.validacion' => '',
+            'rol.estadoId' => '',
+        ];
+    }
+    function guardarEstado() : void {
+
+        $this->rol->revisaId = session()->get('empleadoId');
+        $this->rol->fechaHoraRevisa = now();
+        $this->rol->save();
+
+        $this->cierraDetalle();
+        $this->dispatch('closeModal', $this->idModalEstado);
+
+        $resp["type"] = 'success';
+        $resp["message"] = 'Actualizado con exito';
+
+        $this->dispatch('alert', $resp);
+
+        $this->dispatch('refresh')->to(Administracion::class);
+        
+    }
+    function publicar() : void {
+
+        $this->rol->estadoId = 1;
+        $this->rol->publicaId = session()->get('empleadoId');
+        $this->rol->fechaHoraPublica = now();
+        $this->rol->save();
+
+        $this->cierraDetalle();
+        $this->dispatch('closeModal', $this->idModalEstado);
+
+        $resp["type"] = 'success';
+        $resp["message"] = 'Publicado con exito';
+
+        $this->dispatch('alert', $resp);
+
+        $this->dispatch('refresh')->to(Administracion::class);
+    }
+
     public function render()
     {
         return view('livewire.rol.detalle-rol');

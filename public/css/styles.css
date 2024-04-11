@@ -17,3 +17,19 @@
 .span-title{
     background-color: #f7f6ff;
 }
+.table-rol{
+    font-size: 10px;
+    border: 1px solid;
+}
+.table-rol .hcent{
+    text-align: center;
+}
+.table-rol .vcent{
+    align-content: center;
+}
+.table-rol th{
+    padding: 2px;
+}
+.table-rol td{
+    padding: 2px;
+}

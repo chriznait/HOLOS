@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             EstadoPermisoSeeder::class,
             EstadoRolSeeder::class,
             TurnoSeeder::class,
+            ParametrosSeeder::class,
         ]);
     }
 }

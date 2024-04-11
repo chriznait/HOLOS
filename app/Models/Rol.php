@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Rol extends Model
@@ -27,11 +28,19 @@ class Rol extends Model
         }
         return "";
     }
-    function registradoPor(): HasOne{
+    function registra(): HasOne{
         return $this->hasOne(Empleado::class, 'id', 'registraId');
     }
-    function revisadoPor(): HasOne{
+    function publica(): HasOne{
+        return $this->hasOne(Empleado::class, 'id', 'publicaId');
+    }
+    function revisa(): HasOne{
         return $this->hasOne(Empleado::class, 'id', 'revisaId');
+    }
+    function fechaPublicacion() : string {
+        if(isset($this->attributes['fechaHoraPublica']))
+            return date('d/m/Y H:i', strtotime($this->attributes['fechaHoraPublica']));
+        return "";
     }
     function fechaCreacion() : string {
         if(isset($this->attributes['created_at']))
@@ -42,5 +51,8 @@ class Rol extends Model
         if(isset($this->attributes['fechaHoraRevisa']))
             return date('d/m/Y H:i', strtotime($this->attributes['fechaHoraRevisa']));
         return "";
+    }
+    function empleados() : HasMany {
+        return $this->hasMany(RolEmpleado::class, 'rolId');
     }
 }

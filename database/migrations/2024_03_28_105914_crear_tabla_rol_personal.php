@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('departamentoId');
             $table->unsignedBigInteger('servicioId');
-            $table->unsignedBigInteger('estadoId');
+            $table->unsignedBigInteger('estadoId')->nullable()->default(null);
             $table->integer('anio');
             $table->integer('mes');
             $table->text('observacion')->nullable()->default(null);
             $table->text('validacion')->nullable()->default(null);
             $table->unsignedBigInteger('registraId');
+            $table->unsignedBigInteger('publicaId')->nullable()->default(null);
+            $table->dateTime('fechaHoraPublica')->nullable()->default(null);
             $table->unsignedBigInteger('revisaId')->nullable()->default(null);
             $table->dateTime('fechaHoraRevisa')->nullable()->default(null);
             $table->string('filePath')->nullable()->default(null);
@@ -32,6 +34,7 @@ return new class extends Migration
             $table->foreign('servicioId')->references('id')->on('servicio');
             $table->foreign('estadoId')->references('id')->on('estado_rol');
             $table->foreign('registraId')->references('id')->on('empleado');
+            $table->foreign('publicaId')->references('id')->on('empleado');
             $table->foreign('revisaId')->references('id')->on('empleado');
         });
     }

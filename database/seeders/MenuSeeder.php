@@ -60,7 +60,7 @@ class MenuSeeder extends Seeder
                         'order' => 1,
                     ],
                     [
-                        'name' => 'Administracion Roles',
+                        'name' => 'Gestión Roles',
                         'routeName' => 'rol.administracion',
                         'slug' => 'rol/administracion',
                         'icon' => 'circle',

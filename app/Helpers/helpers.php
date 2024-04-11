@@ -121,4 +121,14 @@ if(!function_exists('getDiasMes')){
         return $resp;
     }
 }
+if(!function_exists('encoding')){
+    function encoding($string): string{
+        return mb_convert_encoding($string, "ISO-8859-1", "UTF-8");
+    }
+}
+if(!function_exists('mayusculas')){
+    function mayusculas($text) : string {
+        return encoding(mb_strtoupper($text, 'UTF-8'));
+    }
+}
     
