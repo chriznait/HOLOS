@@ -5,6 +5,7 @@ namespace App\Livewire\Rol;
 use App\Models\DepartamentoHospital;
 use App\Models\Rol;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -16,8 +17,9 @@ class Administracion extends Component
     public $tituloPagina, $tituloModal, $rol;
     public $user, $empleado, $filMes, $filAnio, $filDepartamento;
     public $departamentos, $servicios, $anios, $meses;
+    public $crud;
 
-    function mount() : void {
+    function mount(Request $request) : void {
         $this->tituloPagina         = "Gestión de Roles";
         $this->filMes               = (int) date('m');
         $this->filAnio              = (int) date('Y');
@@ -34,6 +36,8 @@ class Administracion extends Component
         $this->servicios = [];
         $this->anios = getAnios();
         $this->meses = getMeses();
+
+        $this->crud = $request->attributes->get('permisos');
     }
     function changeDepartamento($init = false) : void {
         $this->servicios = select_values('servicio', 'descripcion', ['departamentoId', $this->rol->departamentoId], ['descripcion', 'asc']);
@@ -155,6 +159,7 @@ class Administracion extends Component
     public function render()
     {
         $rolesGeneral = $this->user->hasPermissionTo(5);
+        
         $roles = Rol::when(!$rolesGeneral, function($q){
                             $q->where('departamentoId', $this->empleado->departamentoId);
                         })

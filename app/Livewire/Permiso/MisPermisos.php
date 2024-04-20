@@ -18,11 +18,9 @@ class MisPermisos extends Component
     public function render()
     {
         $empleado = auth()->user()->empleado;
-        $permisos = Permiso::with('empleado.departamento','empleado.servicio', 'tipo')
+
+        $permisos = Permiso::with('empleado.departamento','empleado.servicio', 'tipo', 'autoriza')
                             ->where('empleadoId', $empleado->id)
-                            ->whereHas('autoriza', function($e){
-                                $e->search($this->search);
-                            })
                             ->orderBy('id', 'desc')
                             ->paginate(10);
         return view('livewire.permiso.mis-permisos', compact('permisos'));

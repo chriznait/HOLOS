@@ -32,4 +32,11 @@
 }
 .table-rol td{
     padding: 2px;
+    color: black;
+}
+.table-rol .departamento{
+    font-size: 14px;
+}
+.table-rol .servicio{
+    font-size: 12px;
 }

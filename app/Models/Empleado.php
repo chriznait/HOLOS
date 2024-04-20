@@ -43,4 +43,7 @@ class Empleado extends Model
     public function cargo() : HasOne {
         return $this->hasOne(Cargo::class, 'id', 'cargoId');
     }
+    public function contrato() : HasOne {
+        return $this->hasOne(TipoContrato::class, 'id', 'tipoContratoId');
+    }
 }

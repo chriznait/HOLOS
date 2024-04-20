@@ -2,14 +2,11 @@
 
 namespace App\Livewire\Administracion;
 
-use App\Livewire\Configuracion\Departamento;
-use App\Models\DepartamentoHospital;
 use App\Models\Empleado;
-use App\Models\Servicio;
 use App\Models\User;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,10 +17,11 @@ class Usuario extends Component
     public $tituloPagina, $tituloModal, $servicios;
     public $empleado, $usuario, $actualizaCredenciales, $usuarioPassword;
     public $selectedRoles;
-
+    public $crud;
     public $search;
 
-    function mount() : void {
+    function mount(HttpRequest $request) : void {
+        $this->crud = $request->attributes->get('permisos');
         $this->servicios = collect();
 
         $this->search = "";
@@ -172,7 +170,7 @@ class Usuario extends Component
     {
         $empleados      = Empleado::search($this->search)
                                 ->with(['area','servicio'])
-                                /* ->where('id', '<>', 1) */
+                                ->where('id', '<>', 1)
                                 ->paginate(10);
                                 
         $departamentos  = select_values('departamento_hospital', 'descripcion', [], ['descripcion', 'asc']);

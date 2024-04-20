@@ -1,7 +1,9 @@
 <x-content-body :title='$tituloPagina'>
-    <x-slot name="buttons">
-        <button class="btn btn-relief-primary" wire:click='muestraModal'>Registrar</button>
-    </x-slot>
+    @if ($crud['crear'])
+        <x-slot name="buttons">
+            <button class="btn btn-relief-primary" wire:click='muestraModal'>Registrar</button>
+        </x-slot>
+    @endif
     <div class="row" id="basic-table">
         <div class="col-12">
             <div class="card">
@@ -26,14 +28,18 @@
                                         <td>{{ $item->descripcion }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-icon btn-flat-success waves-effect"
-                                                    title="Editar" wire:click='muestraModal({{ $item->id }})'>
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-icon btn-flat-danger waves-effect"
-                                                    title="Eliminar" onclick="confirmar({{ $item->id }})">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </button>
+                                                @if ($crud['editar'])
+                                                    <button type="button" class="btn btn-icon btn-flat-success waves-effect"
+                                                        title="Editar" wire:click='muestraModal({{ $item->id }})'>
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                @endif
+                                                @if ($crud['eliminar'])
+                                                    <button type="button" class="btn btn-icon btn-flat-danger waves-effect"
+                                                        title="Eliminar" onclick="confirmar({{ $item->id }})">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>

@@ -4,6 +4,7 @@ namespace App\Livewire\Configuracion;
 
 use App\Models\DepartamentoHospital;
 use App\Models\Servicio as ServicioModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,8 +16,10 @@ class Servicio extends Component
     public $tituloPagina, $tituloModal, $departamentos;
     public $servicio;
     public $idDepartamento, $search;
+    public $crud;
 
-    function mount() : void {
+    function mount(Request $request) : void {
+        $this->crud = $request->attributes->get('permisos');
         $this->tituloPagina = 'Servicios';
         $this->search = '';
         $this->idDepartamento = '';

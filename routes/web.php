@@ -51,6 +51,7 @@ Route::group(['middleware'=> 'auth'],function() {
         Route::get('administracion', App\Livewire\Rol\Administracion::class)->name('rol.administracion');
 
         Route::get('pdf/{idRol}', [App\Http\Controllers\RolController::class, 'pdf'])->name('rol.pdf');
+        Route::get('general-xlsx/', [App\Http\Controllers\RolController::class, 'generalXls'])->name('rol.general-xlsx');
     });
     Route::prefix('configuracion')->group(function () {
         Route::get('departamento', Departamento::class)->name('configuracion.departamento');

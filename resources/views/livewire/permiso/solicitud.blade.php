@@ -56,55 +56,57 @@
                                                             class="btn btn-icon btn-flat-success waves-effect" 
                                                             title="Detalles"
                                                             wire:click="$dispatchTo('permiso.form-detalle', 'muestra-modal', { id: {{ $item->id }} })"
-                                                        >
-                                                            <x-icon icon="list"/>
-                                                        </button>
-                                                    @if ($item->estadoId == 1 && $botonAprueba)
-                                                        <button type="button" 
-                                                            class="btn btn-icon btn-flat-primary waves-effect" 
-                                                            title="Aprobar"
-                                                            onclick="confirmar({{ $item->id }}, 2)"
-                                                        >
-                                                            <x-icon icon="check"/>
-                                                        </button>
-                                                        <button type="button" 
-                                                            class="btn btn-icon btn-flat-danger waves-effect" 
-                                                            title="Rechazar"
-                                                            onclick="confirmar({{ $item->id }}, 3)"
-                                                        >
-                                                            <x-icon icon="xmark"/>
-                                                        </button>
-                                                    @endif
-                                                    @if ($item->estadoId == 2 && $botonHora)
-                                                        <button type="button" 
-                                                            class="btn btn-icon btn-flat-info waves-effect" 
-                                                            title="Hora de salida"
-                                                            onclick="confirmar({{ $item->id }}, 4)"
-                                                        >
-                                                            <x-icon icon="clock"/>
-                                                            Salida
-                                                        </button>
-                                                    @endif
-                                                    @if ($item->estadoId == 4 && $botonHora)
-                                                        <button type="button" 
-                                                            class="btn btn-icon btn-flat-info waves-effect" 
-                                                            title="Hora de retorno"
-                                                            onclick="confirmar({{ $item->id }}, 5)"
-                                                        >
-                                                            <i class="fa-solid fa-clock"></i>
-                                                            Retorno
-                                                        </button>
-                                                    @endif
-                                                    
-                                                    
-                                                    @if (!in_array($item->estadoId, [3,5,6]) && $botonAprueba)
-                                                        <button type="button" 
-                                                            class="btn btn-icon btn-flat-dark waves-effect" 
-                                                            title="Anular"
-                                                            onclick="confirmar({{ $item->id }}, 6)"
-                                                        >
-                                                            <x-icon icon="ban"/>
-                                                        </button>
+                                                    >
+                                                        <x-icon icon="list"/>
+                                                    </button>
+                                                    @if ($crud['editar'])
+                                                        @if ($item->estadoId == 1 && $botonAprueba)
+                                                            <button type="button" 
+                                                                class="btn btn-icon btn-flat-primary waves-effect" 
+                                                                title="Aprobar"
+                                                                onclick="confirmar({{ $item->id }}, 2)"
+                                                            >
+                                                                <x-icon icon="check"/>
+                                                            </button>
+                                                            <button type="button" 
+                                                                class="btn btn-icon btn-flat-danger waves-effect" 
+                                                                title="Rechazar"
+                                                                onclick="confirmar({{ $item->id }}, 3)"
+                                                            >
+                                                                <x-icon icon="xmark"/>
+                                                            </button>
+                                                        @endif
+                                                        @if ($item->estadoId == 2 && $botonHora)
+                                                            <button type="button" 
+                                                                class="btn btn-icon btn-flat-info waves-effect" 
+                                                                title="Hora de salida"
+                                                                onclick="confirmar({{ $item->id }}, 4)"
+                                                            >
+                                                                <x-icon icon="clock"/>
+                                                                Salida
+                                                            </button>
+                                                        @endif
+                                                        @if ($item->estadoId == 4 && $botonHora)
+                                                            <button type="button" 
+                                                                class="btn btn-icon btn-flat-info waves-effect" 
+                                                                title="Hora de retorno"
+                                                                onclick="confirmar({{ $item->id }}, 5)"
+                                                            >
+                                                                <i class="fa-solid fa-clock"></i>
+                                                                Retorno
+                                                            </button>
+                                                        @endif
+                                                        
+                                                        
+                                                        @if (!in_array($item->estadoId, [3,5,6]) && $botonAprueba)
+                                                            <button type="button" 
+                                                                class="btn btn-icon btn-flat-dark waves-effect" 
+                                                                title="Anular"
+                                                                onclick="confirmar({{ $item->id }}, 6)"
+                                                            >
+                                                                <x-icon icon="ban"/>
+                                                            </button>
+                                                        @endif
                                                     @endif
                                                 </div>
                                             </td>

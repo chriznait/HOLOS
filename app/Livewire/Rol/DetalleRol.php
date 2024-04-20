@@ -5,6 +5,7 @@ namespace App\Livewire\Rol;
 use App\Models\EstadoRol;
 use App\Models\Rol;
 use App\Models\Turno;
+use Illuminate\Http\Request;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -15,11 +16,12 @@ class DetalleRol extends Component
     public $tituloModal, $idModal;
     public $rol, $diasMes;
     public $tituloModalEstado, $idModalEstado;
+    public $crud;
 
-    function mount() : void {
+    function mount(Request $request) : void {
         $this->tituloModalEstado    = "Actualiza estado";
         $this->idModalEstado        = "mdl-actualiza-estado";
-
+        $this->crud = $request->attributes->get('permisos');
 
         $this->tituloModal = "Detalle Rol";
         $this->idModal = "mdl-rol-detalle";

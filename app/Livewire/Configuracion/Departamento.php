@@ -3,6 +3,7 @@
 namespace App\Livewire\Configuracion;
 
 use App\Models\DepartamentoHospital;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,8 +14,10 @@ class Departamento extends Component
 
     public $tituloPagina, $tituloModal, $search;
     public $departamento;
+    public $crud;
 
-    function mount() : void {
+    function mount(Request $request) : void {
+        $this->crud = $request->attributes->get('permisos');
         $this->tituloPagina = 'Departamentos Hospital';
         $this->search = '';
         $this->reseteaDatos();

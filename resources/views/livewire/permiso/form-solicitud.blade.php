@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="mb-1">
                                         <label for="ipt-destino" class="form-label">Tipo</label>
-                                        <select class="form-control" wire:model="permiso.tipoId">
+                                        <select class="form-select" wire:model="permiso.tipoId">
                                             <option value="">- seleccione -</option>
                                             @foreach ($tipos as $item)
                                                 <option value="{{ $item->id }}">{{ $item->descripcion }}</option>

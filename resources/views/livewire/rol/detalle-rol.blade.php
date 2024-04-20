@@ -123,7 +123,7 @@
         </div>
         @slot('modalFooter')
             
-                {{-- @if (in_array($rol->getOriginal('estadoId'), [1,2])) --}}
+                @if ($crud['editar'])
                     @if ($rol->getOriginal('estadoId') == 3 || is_null($rol->getOriginal('estadoId')))
                         <button class="btn btn-relief-primary"
                             wire:click="publicar"
@@ -132,23 +132,25 @@
                             Publicar
                         </button>
                     @endif
-                    @if ($rol->getOriginal('estadoId') == 1)
-                        <button class="btn btn-relief-primary"
-                            wire:click="abrirModalEstado(2)"
-                        >
-                            <i class="fa fa-check"></i>
-                            Aprobar
-                        </button>
-                    @endif
-                    @if ($rol->getOriginal('estadoId') != 3 && !is_null($rol->getOriginal('estadoId')))
-                        <button class="btn btn-relief-danger"
-                            wire:click="abrirModalEstado(3)"
-                        >
-                            <i class="fa fa-remove"></i>
-                            Rechazar
-                        </button>
-                    @endif
-                {{-- @endif --}}
+                    @can('rol revisa')
+                        @if ($rol->getOriginal('estadoId') == 1)
+                            <button class="btn btn-relief-primary"
+                                wire:click="abrirModalEstado(2)"
+                            >
+                                <i class="fa fa-check"></i>
+                                Aprobar
+                            </button>
+                        @endif
+                        @if ($rol->getOriginal('estadoId') != 3 && !is_null($rol->getOriginal('estadoId')))
+                            <button class="btn btn-relief-danger"
+                                wire:click="abrirModalEstado(3)"
+                            >
+                                <i class="fa fa-remove"></i>
+                                Rechazar
+                            </button>
+                        @endif
+                    @endcan
+                @endif
         @endslot
     </x-modal>
     <x-modal :modalTitulo="$tituloModalEstado" :modalId="$idModalEstado" guardar="guardarEstado">

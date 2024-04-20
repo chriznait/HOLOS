@@ -4,6 +4,7 @@ namespace App\Livewire\Permiso;
 
 use App\Models\Permiso;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,8 +16,11 @@ class Solicitud extends Component
 
     public $search;
 
-    function mount() : void {
+    public $crud;
+
+    function mount(Request $request) : void {
         $this->search = "";
+        $this->crud = $request->attributes->get('permisos');
     }
 
     function setEstado($id, $estado) : void {
