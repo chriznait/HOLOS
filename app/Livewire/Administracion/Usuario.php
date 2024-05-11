@@ -67,9 +67,12 @@ class Usuario extends Component
     }
     function rules() : array {
         $rules = [
+            'empleado.codigo'           => 'nullable',
             'empleado.apellidoPaterno'  => 'required',
             'empleado.apellidoMaterno'  => 'required',
             'empleado.nombres'          => 'required',
+            'empleado.email'            => 'nullable',
+            'empleado.nroCelular'       => 'nullable',
             'empleado.tipoDocumentoId'  => 'required',
             'empleado.nroDocumento'     => ['required', 'unique:empleado,nroDocumento'.(!is_null($this->empleado->id) ? ','.$this->empleado->id : '')],
             'empleado.fechaNacimiento'  => 'required',
@@ -165,6 +168,9 @@ class Usuario extends Component
         $this->dispatch('alert', $resp);        
     }
 
+    function updatedSearch() : void {
+        $this->resetPage();
+    }
     
     public function render()
     {

@@ -13,7 +13,7 @@ class TipoContratoSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = ['CAS', 'Nombrado', 'Tercero'];
+        $data = ['CAS', 'CAS INDETERMINADO', 'CAS REGULAR', 'CONTRATO 276', 'DESTACADO', 'NOMBRADO', 'SERUMS EQUIV'];
 
         foreach ($data as $item) {
             TipoContrato::create(['descripcion' => $item]);

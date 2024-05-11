@@ -54,7 +54,7 @@ class FortifyServiceProvider extends ServiceProvider
                 $empleado = Empleado::where('userId', $user->id)->first();
 
                 $request->session()->put('nombre', $empleado->nombres);
-                $request->session()->put('cargo', $empleado->cargo->descripcion);
+                $request->session()->put('cargo', !is_null($empleado->cargo) ?? $empleado->cargo->descripcion);
                 $request->session()->put('empleadoId', $empleado->id);
                 return $user;
             }

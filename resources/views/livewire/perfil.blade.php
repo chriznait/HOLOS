@@ -9,7 +9,7 @@
                                 height="110" width="110" alt="User avatar">
                             <div class="user-info text-center">
                                 <h4>{{ $empleado->nombreCompleto() }}</h4>
-                                <span class="badge bg-light-secondary">{{ $empleado->cargo->descripcion }}</span>
+                                <span class="badge bg-light-secondary">{{ $empleado->cargo?->descripcion }}</span>
                             </div>
                         </div>
                     </div>

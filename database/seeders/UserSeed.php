@@ -19,7 +19,7 @@ class UserSeed extends Seeder
                 'username' => 'admin',
                 'password' => Hash::make('admin2024')
             ],
-            [
+            /* [
                 'username' => 'user1',
                 'password' => Hash::make('user1')
             ],
@@ -30,7 +30,7 @@ class UserSeed extends Seeder
             [
                 'username' => 'user3',
                 'password' => Hash::make('user3')
-            ],
+            ], */
         ];
 
         foreach ($data as $item) {

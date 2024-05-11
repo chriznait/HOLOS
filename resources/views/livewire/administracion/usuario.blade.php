@@ -128,11 +128,27 @@
                     label='Sexo' 
                     model="empleado.tipoSexoId" 
                     wire:model='empleado.tipoSexoId'/>
+
+                <x-form-input 
+                    label='Email' 
+                    model="empleado.email" 
+                    wire:model='empleado.email'/>
+
+                <x-form-input 
+                    label='Nro Celular' 
+                    model="empleado.nroCelular" 
+                    wire:model='empleado.nroCelular'/>
         
                 
             </div>
             <div class="col-sm-4">
                 <x-divider text="Datos empleado" />
+
+                <x-form-input 
+                    type="number"
+                    label='Código' 
+                    model="empleado.codigo" 
+                    wire:model='empleado.codigo'/>
 
                 <x-form-select 
                     :datas="$profesiones" 
