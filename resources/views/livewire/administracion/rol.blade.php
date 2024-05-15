@@ -81,7 +81,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="table-responsive">
-                    <table class="table table-flush-spacing">
+                    <table class="table table-flush-spacing table-hover">
                         <tbody>
                             <tr>
                                 <td class="text-nowrap fw-bolder p-tb-0">
