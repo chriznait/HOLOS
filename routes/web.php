@@ -10,7 +10,6 @@ use App\Livewire\Permiso\FormSolicitud;
 use App\Livewire\Permiso\MisPermisos;
 use App\Livewire\Permiso\Solicitud;
 use Illuminate\Support\Facades\Route;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,5 +65,10 @@ Route::group(['middleware'=> 'auth'],function() {
     Route::prefix('permiso')->group(function () {
         Route::get('solicitud', Solicitud::class)->name('permiso.solicitud');
         Route::get('mis-permisos', MisPermisos::class)->name('permiso.mis-permisos');
+    });
+
+    Route::prefix('asistencia')->group(function () {
+        Route::get('mis-marcaciones', App\Livewire\Asistencia\MisMarcaciones::class)->name('asistencia.mis-marcaciones');
+        Route::get('registros', App\Livewire\Asistencia\Registros::class)->name('asistencia.registros');
     });
 });

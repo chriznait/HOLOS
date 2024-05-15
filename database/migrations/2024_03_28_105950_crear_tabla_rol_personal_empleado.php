@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('rolId');
             $table->unsignedBigInteger('empleadoId');
             $table->unsignedBigInteger('tipoContratoId');
-            $table->unsignedBigInteger('cargoId');
-            $table->unsignedBigInteger('profesionId');
+            $table->unsignedBigInteger('cargoId')->nullable();
+            $table->unsignedBigInteger('profesionId')->nullable();
             $table->timestamps();
 
             $table->foreign('rolId')->references('id')->on('rol_personal')->onDelete('cascade');

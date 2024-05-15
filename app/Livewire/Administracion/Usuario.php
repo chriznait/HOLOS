@@ -177,6 +177,7 @@ class Usuario extends Component
         $empleados      = Empleado::search($this->search)
                                 ->with(['area','servicio'])
                                 ->where('id', '<>', 1)
+                                ->orderBy('id', 'desc')
                                 ->paginate(10);
                                 
         $departamentos  = select_values('departamento_hospital', 'descripcion', [], ['descripcion', 'asc']);

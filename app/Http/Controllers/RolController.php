@@ -104,7 +104,7 @@ class RolController extends Controller
             $pdf->Cell(75, $h2/2, mayusculas($empleado->empleado->nombreCompleto()),0,1);
 
             $pdf->SetX($x);
-            $pdf->Cell(75, $h2/2, mayusculas($empleado->empleado->cargo->descripcion),'B');
+            $pdf->Cell(75, $h2/2, mayusculas($empleado->empleado->cargo?->descripcion),'B');
             $pdf->SetXY($x+75, $y);
             $totalHoras = 0;
             foreach ($diasMes as $i => $dia) {
@@ -280,8 +280,8 @@ class RolController extends Controller
                         $emp = $empleado->empleado;
                         $sheet->setCellValue('A'.$ini, $i+1)
                                 ->setCellValue('B'.$ini, $emp->nombreCompleto())
-                                ->setCellValue('C'.$ini, $emp->cargo->descripcion)
-                                ->setCellValue('D'.$ini, $emp->contrato->descripcion);
+                                ->setCellValue('C'.$ini, $emp->cargo?->descripcion)
+                                ->setCellValue('D'.$ini, $emp->contrato?->descripcion);
                             
                         foreach ($diasMes as $i => $dia) {
                             $turno = $empleado->detalles->where('dia', $i)->first();

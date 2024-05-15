@@ -280,6 +280,7 @@ class EmpleadoSeeder extends Seeder
             $tipoContrato = TipoContrato::whereFirst('descripcion', $item['condicion']);
             Empleado::create([
                 'userId'            => $usr->id,
+                'codigo'            => !empty($item['codigo']) ? $item['codigo'] : null,
                 'apellidoPaterno'   => $item['apePaterno'],
                 'apellidoMaterno'   => $item['apeMaterno'],
                 'nombres'           => $item['nombre1'].(!empty($item['nombre2']) ? ' '.$item['nombre2']:'').(!empty($item['nombre3']) ? ' '.$item['nombre3']:''),

@@ -46,6 +46,29 @@ class MenuSeeder extends Seeder
                 ]
             ],
             [
+                'name' => 'Asistencia',
+                'routeName' => 'asistencia',
+                'slug' => 'asistencia',
+                'icon' => 'check-square',
+                'order' => 3,
+                'children' => [
+                    [
+                        'name' => 'Mis marcaciones',
+                        'routeName' => 'asistencia.mis-marcaciones',
+                        'slug' => 'asistencia/mis-marcaciones',
+                        'icon' => 'circle',
+                        'order' => 1,
+                    ],
+                    [
+                        'name' => 'Registros',
+                        'routeName' => 'asistencia.registros',
+                        'slug' => 'asistencia/registros',
+                        'icon' => 'circle',
+                        'order' => 2,
+                    ],
+                ]
+            ],
+            [
                 'name' => 'Roles',
                 'routeName' => 'rol',
                 'slug' => 'rol',
@@ -73,7 +96,7 @@ class MenuSeeder extends Seeder
                 'routeName' => 'administracion',
                 'slug' => 'administracion',
                 'icon' => 'users',
-                'order' => 4,
+                'order' => 5,
                 'children' => [
                     [
                         'name' => 'Roles',
@@ -96,7 +119,7 @@ class MenuSeeder extends Seeder
                 'routeName' => 'configuracion',
                 'slug' => 'configuracion',
                 'icon' => 'bar-chart',
-                'order' => 5,
+                'order' => 6,
                 'children' => [
                     [
                         'name' => 'Departamentos',

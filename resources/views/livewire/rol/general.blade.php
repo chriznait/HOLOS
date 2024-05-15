@@ -82,7 +82,7 @@
                                                 <tr>
                                                     <td style="white-space: nowrap;">
                                                         {{ strtoupper($empleado->empleado->nombreCompleto()) }}<br>
-                                                        {{ $empleado->empleado->cargo->descripcion }}
+                                                        {{ $empleado->empleado->cargo?->descripcion }}
                                                     </td>
                                                     @php
                                                         $totalHoras = 0;
