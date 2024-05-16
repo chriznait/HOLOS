@@ -6,6 +6,7 @@ use App\Models\Empleado;
 use App\Models\Rol;
 use App\Models\RolDetalle;
 use App\Models\RolEmpleado;
+use App\Models\Turno;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
@@ -102,6 +103,7 @@ class SubirRol extends Component
     }
     function guardaDetalles($filePath) : array {
         $dias = getDiasMes($this->rol->anio, $this->rol->mes);
+        $turnosExistentes = Turno::get()->pluck('abrev')->toArray();
 
         
         $absolutePath = storage_path('app/' . $filePath);
@@ -150,14 +152,18 @@ class SubirRol extends Component
                             $turno = $sheet->getCell($letra . $i)->getValue();
                             $dia = $sheet->getCell($letra . '5')->getValue();
                             if(!empty($turno)){
-                                $items[] = [
-                                    'rolEmpleadoId' => $rolEmpleado->id,
-                                    'turno' => $turno,
-                                    'dia' => $dia
-                                ];
+                                if(in_array($turno, $turnosExistentes)){
+                                    $items[] = [
+                                        'rolEmpleadoId' => $rolEmpleado->id,
+                                        'turno' => $turno,
+                                        'dia' => $dia
+                                    ];
+                                }else{
+                                    $errores[] = '('.$turno.') turno registrado no existe';            
+                                }
                             }
                         }
-                        if($empleado->departamentoId != $this->rol->departamentoId && 
+                        if($empleado->departamentoId != $this->rol->departamentoId || 
                             $empleado->servicioId != $this->rol->servicioId)
                         {
                             $empleado->departamentoId = $this->rol->departamentoId;
