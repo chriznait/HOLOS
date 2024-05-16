@@ -108,7 +108,7 @@
                                         foreach ($empleado->detalles as $detalle) {
                                             if($detalle->dia == $i) {
                                                 $turno = $detalle->turno;
-                                                $totalHoras += $detalle->rTurno->horas;
+                                                $totalHoras += $detalle->rTurno?->horas;
                                             }
                                         }
                                     @endphp
