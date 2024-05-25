@@ -72,7 +72,7 @@
                                                 @foreach ($diasMes as $i => $dia)
                                                     <th class="hcent">{{ $i }}</th>
                                                 @endforeach
-                                                @hasanyrole('Administrador')
+                                                @hasanyrole('Administrador|Jefe Servicio|Jefe departamento|Recursos Humanos')
                                                     @foreach ($turnos as $turno)
                                                         <th rowspan="2" class="vcent hcent">{{ $turno->turno }}</th>    
                                                     @endforeach
@@ -119,7 +119,7 @@
                                                         @endphp
                                                         <td class="hcent">{{ $turno }}</td>
                                                     @endforeach
-                                                    @hasanyrole('Administrador')
+                                                    @hasanyrole('Administrador|Jefe Servicio|Jefe departamento|Recursos Humanos')
                                                         @foreach ($turnos as $turno)
                                                             <th class="vcent hcent">{{ $turno->cantidad }}</th>    
                                                         @endforeach

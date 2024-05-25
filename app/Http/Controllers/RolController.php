@@ -175,11 +175,11 @@ class RolController extends Controller
                 ],
             ],
             'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Centrar texto
             ],
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, // Tipo de relleno sólido
-                'startColor' => ['argb' => 'D8E4BC'], // Color de fondo (en este caso, amarillo)
+                'startColor' => ['argb' => 'D8E4BC'], // Color de fondo (en este caso, verde claro)
             ],
         ];
 
@@ -230,14 +230,14 @@ class RolController extends Controller
 
         $sheet->setTitle('Rol');
         $sheet->getColumnDimension('A')->setWidth(5);
-        $sheet->getColumnDimension('B')->setWidth(25);
+        $sheet->getColumnDimension('B')->setWidth(30);
         $sheet->getColumnDimension('C')->setWidth(15);
-        $sheet->getColumnDimension('D')->setWidth(15);
-        for ($i = 3; $i <= 45 ; $i++) {
+        $sheet->getColumnDimension('D')->setWidth(10);
+        for ($i = 5; $i <= 45 ; $i++) {
             $sheet->getColumnDimension(numeroLetra($i))->setWidth(5);
         }
         $sheet->getStyle('A'.$ini.':'.numeroLetra(count($diasMes)+5).($ini+1))->applyFromArray($headerStyle);
-        $sheet->freezePane('A3');
+        
 
         
 
@@ -260,8 +260,7 @@ class RolController extends Controller
         }
 
         $sheet->mergeCells(numeroLetra($iniTurnos + count($diasMes) + 1).$ini.':'.numeroLetra($iniTurnos + count($diasMes) + 1).$ini+1)
-                ->setCellValue(numeroLetra($iniTurnos + count($diasMes) + 1).$ini,'TOTAL');
-
+                ->setCellValue(numeroLetra($iniTurnos + count($diasMes) + 1).$ini,'TOTAL');         
 
         $ini += 2;
 
