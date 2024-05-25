@@ -17,6 +17,7 @@ class General extends Component
     public $departamentos, $anios, $meses;
     public $departamentosRol;
     public $diasMes;
+    public $turnos;
 
     function mount() : void {
         $this->tituloPagina = "Roles de personal";
@@ -34,6 +35,7 @@ class General extends Component
         $this->anios = getAnios();
         $this->meses = getMeses();
         $this->departamentosRol = [];
+        $this->turnos = [];
     }
     function cargarRoles() : void {
         $this->diasMes = getDiasMes($this->filAnio, $this->filMes);
@@ -57,6 +59,19 @@ class General extends Component
                                 });
                         })
                         ->get();
+
+        $this->turnos = Rol::select('RD.turno')
+                            ->from('rol_personal as R')
+                            ->join('rol_personal_empleado as RE', 'RE.rolId', '=', 'R.id')
+                            ->join('rol_personal_detalle as RD', 'RD.rolEmpleadoId', '=', 'RE.id')
+                            ->where('R.anio', $this->filAnio)
+                            ->where('R.mes', $this->filMes)
+                            ->when(!empty($this->filDepartamento), function($qq){
+                                $qq->where('R.departamentoId', $this->filDepartamento);
+                            })->groupBy('RD.turno')->get()->map(function($item){
+                                $item->cantidad = 0;
+                                return $item;
+                            });
     }
     function descargarXls() {
         

@@ -2,7 +2,9 @@
 
 use App\Livewire\Administracion\Rol;
 use App\Livewire\Administracion\Usuario;
+use App\Livewire\Configuracion\Cargo;
 use App\Livewire\Configuracion\Departamento;
+use App\Livewire\Configuracion\Profesion;
 use App\Livewire\Configuracion\Servicio;
 use App\Livewire\Inicio;
 use App\Livewire\Perfil;
@@ -55,6 +57,8 @@ Route::group(['middleware'=> 'auth'],function() {
     Route::prefix('configuracion')->group(function () {
         Route::get('departamento', Departamento::class)->name('configuracion.departamento');
         Route::get('servicio', Servicio::class)->name('configuracion.servicio');
+        Route::get('profesion', Profesion::class)->name('configuracion.profesion');
+        Route::get('cargo', Cargo::class)->name('configuracion.cargo');
     });
 
     Route::prefix('administracion')->group(function () {

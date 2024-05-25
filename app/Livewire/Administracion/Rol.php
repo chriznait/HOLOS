@@ -50,8 +50,43 @@ class Rol extends Component
         }
         return $menu;
     }
+    public function getChildren($data, $line)
+    {
+        $children = [];
+        foreach ($data as $line1) {
+            if ($line['id'] == $line1['parentId']) {
+                $children = array_merge(
+                        $children, 
+                        [ array_merge(
+                            $line1, 
+                            ['submenu' => $this->getChildren($data, $line1) ],
+                        ) ]
+                    );
+            }
+        }
+        return $children;
+    }
+    public function optionsMenu()
+    {
+        return MenuModel::where('enabled', 1)
+                ->orderby('parentId')
+                ->orderby('order')
+                ->orderby('name')
+                ->get()
+                ->toArray();
+    }
     function setDataMenu() : void {
-        $menu = Menu::menus();
+
+        $data = $this->optionsMenu();
+        
+        $menu = [];
+        foreach ($data as $line) {
+            if(is_null($line['parentId'])){
+                $item = [ array_merge($line, ['submenu' => $this->getChildren($data, $line) ]) ];
+                $menu = array_merge($menu, $item);
+            }
+        }
+
         $this->menu = $this->setDetalles($menu, 0);
     }
     function changeVer($index) : void {

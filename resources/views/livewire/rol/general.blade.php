@@ -10,6 +10,7 @@
             Descargar Rol
         </button>
     </x-slot>
+    
 
     <div class="row" id="basic-table">
         <div class="col-12">
@@ -71,6 +72,11 @@
                                                 @foreach ($diasMes as $i => $dia)
                                                     <th class="hcent">{{ $i }}</th>
                                                 @endforeach
+                                                @hasanyrole('Administrador')
+                                                    @foreach ($turnos as $turno)
+                                                        <th rowspan="2" class="vcent hcent">{{ $turno->turno }}</th>    
+                                                    @endforeach
+                                                @endhasanyrole
                                                 <th rowspan="2" class="vcent hcent">Total <br> Horas</th>
                                             </tr>
                                             <tr>
@@ -79,6 +85,12 @@
                                                 @endforeach
                                             </tr>
                                             @foreach ($servicio->roles[0]->empleados as $empleado)
+                                            @php
+                                                $turnos->transform(function ($item) {
+                                                    $item->cantidad = 0;
+                                                    return $item;
+                                                });
+                                            @endphp
                                                 <tr>
                                                     <td style="white-space: nowrap;">
                                                         {{ strtoupper($empleado->empleado->nombreCompleto()) }}<br>
@@ -94,11 +106,24 @@
                                                                 if($detalle->dia == $i) {
                                                                     $turno = $detalle->turno;
                                                                     $totalHoras += $detalle->rTurno->horas;
+
+                                                                    $turnos->transform(function ($item) use ($turno) {
+                                                                        if ($item->turno === $turno) {
+                                                                            $item->cantidad++;
+                                                                        }
+                                                                        return $item;
+                                                                    });
+
                                                                 }
                                                             }
                                                         @endphp
                                                         <td class="hcent">{{ $turno }}</td>
                                                     @endforeach
+                                                    @hasanyrole('Administrador')
+                                                        @foreach ($turnos as $turno)
+                                                            <th class="vcent hcent">{{ $turno->cantidad }}</th>    
+                                                        @endforeach
+                                                    @endhasanyrole
                                                     <td class="hcent">{{ $totalHoras }}</td>
                                                 </tr>
                                             @endforeach
