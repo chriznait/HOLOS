@@ -60,6 +60,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('template/app-assets/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('template/app-assets/vendors/css/calendars/fullcalendar.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('template/app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('template/app-assets/vendors/css/forms/select/select2.min.css') }}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -131,16 +132,18 @@
     <script src="{{ asset('template/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('vendors/daterangepicker/moment.min.js') }}"></script>
     <script src="{{ asset('vendors/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('template/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
     <script src="{{ asset('template/app-assets/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('template/app-assets/js/core/app.js') }}"></script>
-    <script src="{{ asset('js/scripts.js') }}"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script src="{{ asset('template/app-assets/js/scripts/forms/form-select2.min.js') }}"></script>
     <!-- END: Page JS-->
+    <script src="{{ asset('js/scripts.js') }}"></script>
 
     @stack('scripts')
 

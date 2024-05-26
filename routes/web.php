@@ -53,6 +53,7 @@ Route::group(['middleware'=> 'auth'],function() {
 
         Route::get('pdf/{idRol}', [App\Http\Controllers\RolController::class, 'pdf'])->name('rol.pdf');
         Route::get('general-xlsx/', [App\Http\Controllers\RolController::class, 'generalXls'])->name('rol.general-xlsx');
+        Route::get('resumen/', [App\Http\Controllers\RolController::class, 'resumenRol'])->name('rol.resumen');
     });
     Route::prefix('configuracion')->group(function () {
         Route::get('departamento', Departamento::class)->name('configuracion.departamento');
@@ -74,5 +75,12 @@ Route::group(['middleware'=> 'auth'],function() {
     Route::prefix('asistencia')->group(function () {
         Route::get('mis-marcaciones', App\Livewire\Asistencia\MisMarcaciones::class)->name('asistencia.mis-marcaciones');
         Route::get('registros', App\Livewire\Asistencia\Registros::class)->name('asistencia.registros');
+        Route::get('buscar-marcaciones', App\Livewire\Asistencia\BuscarMarcaciones::class)->name('asistencia.buscar-marcaciones');
     });
+
+    Route::prefix('empleado')->group(function () {
+        Route::get('buscar', [App\Http\Controllers\EmpleadoController::class, 'buscarEmpleado'])->name('empleado.buscar');
+    });
+
+    
 });

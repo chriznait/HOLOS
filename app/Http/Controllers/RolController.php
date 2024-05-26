@@ -126,6 +126,135 @@ class RolController extends Controller
         $pdf->Output('I', encoding($titulo).'.pdf');
         exit();
     }
+
+    function resumenRol(Request $request) : void {
+
+        $anio = $request->get('anio');
+        $mes = $request->get('mes');
+        $meses = getMeses();
+
+        /* $roles = Rol::with('empleados.detalles.rTurno')->where(['anio' => $anio, 'mes' => $mes, 'estadoId' => 2])->get()->toArray(); */
+        $roles = Rol::with(['empleados.empleado.cargo', 'empleados.detalles.rTurno'])
+                    ->where(['anio' => $anio, 'mes' => $mes, 'estadoId' => 2])
+                    ->get();
+        $empleadosCollection = $roles->flatMap(function ($rol) {
+            return $rol->empleados->map(function ($empleado) use ($rol) {
+                return $empleado; // Devuelve el empleado directamente
+            });
+        });
+        $empleadosCollection = $empleadosCollection->sortBy(function ($empleado) {
+            return $empleado->empleado->cargo->ordenRolConsolidado;
+        });
+
+        $diasMes = getDiasMes($anio, $mes);
+        $titulo = 'Resumen rol ('.$meses[$mes].' '.$anio.')';
+
+        $w = 195/(count($diasMes));
+
+        $parametros = Parametros::all()->toArray();
+        $size1 = 12;
+        $size2 = 9;
+        $size3 = 7;
+        /*277*/
+        $h = 4;
+        $h2 = 8;
+        $h3 = 12;
+
+        $pdf = new CustomPdf('L', 'mm', 'A4');
+        $pdf->AddPage();
+        $pdf->AliasNbPages();
+        $pdf->SetTitle(encoding($titulo));
+        $pdf->SetFillColor(247,201,91);
+        $pdf->setFont('Courier');
+        $pdf->setFontSize($size1);
+        $pdf->setBold(true);
+        $pdf->Cell(0, $h, 'PROGRAMACION DE ASISTENCIA DE PERSONAL', 0, 1, 'C');
+        $pdf->Cell(0, $h, $parametros[0]['valor'].' '.$meses[$mes].' '.$anio, 0, 1, 'C');
+
+        $pdf->Ln(2);
+
+        
+        $pdf->setFontSize($size2);
+        $pdf->Cell(7, $h3, encoding('N°'),1,0,'C',1);
+        $pdf->Cell(75, $h3, 'Nombres',1,0,'C',1);
+
+        $x = $pdf->GetX();
+
+        foreach ($diasMes as $i => $dia) {
+            $pdf->Cell($w, $h3/2, $i,1,0,'C',1);
+        }
+        /* $pdf->Cell($w, $h3, '',1,0,'C',1); */
+        /* $pdf->RotatedText($pdf->getX()-1.5,$pdf->getY()+$h3-1,'Horas',90); */
+
+        $y = $pdf->getY();
+        $pdf->Ln();
+        
+        $pdf->SetLeftMargin(92);
+        $pdf->setY($y+$h3/2);
+        foreach ($diasMes as $i => $dia) {
+            $pdf->Cell($w, $h3/2, $dia['inicial'],1,0,'C',1);
+        }
+        $pdf->SetLeftMargin(10);
+        $pdf->setFont('Courier','', $size3);
+        $pdf->Ln();
+
+        /* foreach ($empleadosCollection as $i => $empleado){
+            $pdf->Cell(7, $h2, ($i+1),1,0,'C');
+
+            $x = $pdf->getX();
+            $y = $pdf->getY();
+            $pdf->Cell(75, $h2/2, mayusculas($empleado->empleado->nombreCompleto()),0,1);
+
+            $pdf->SetX($x);
+            $pdf->Cell(75, $h2/2, mayusculas($empleado->empleado->cargo?->descripcion),'B');
+            $pdf->SetXY($x+75, $y);
+            $totalHoras = 0;
+            foreach ($diasMes as $i => $dia) {
+                $turno = "";
+                foreach ($empleado->detalles as $detalle) {
+                    if($detalle->dia == $i) {
+                        $turno = $detalle->turno;
+                        $totalHoras += $detalle->rTurno->horas;
+                    }
+                }
+                $pdf->Cell($w, $h2, $turno,1,0,'C');
+            }
+            $pdf->Cell($w, $h2, $totalHoras,1,0,'C');
+
+            $pdf->Ln();
+        } */
+        $cambioCargo = true;
+        foreach ($empleadosCollection as $i => $empleado){
+            if($cambioCargo){
+                $pdf->setBold(true);
+                $pdf->Cell(7, $h, '','BLR',0,'C');
+                $pdf->Cell(195+75, $h, mayusculas($empleado->empleado->cargo?->descripcion),'BLR',1);
+                $pdf->setBold(false);
+            }
+            $pdf->Cell(7, $h, ($i+1),'BLR',0,'C');
+            $x = $pdf->getX();
+            $y = $pdf->getY();
+            $pdf->Cell(75, $h, mayusculas($empleado->empleado->nombreCompleto()),'BR',0);
+            $totalHoras = 0;
+            foreach ($diasMes as $i => $dia) {
+                $turno = "";
+                foreach ($empleado->detalles as $detalle) {
+                    if($detalle->dia == $i) {
+                        $turno = $detalle->turno;
+                        $totalHoras += $detalle->rTurno->horas;
+                    }
+                }
+                $pdf->Cell($w, $h, $turno,'BR',0,'C');
+            }
+            /* $pdf->Cell($w, $h, $totalHoras,'BR',0,'C'); */
+
+            $pdf->Ln();
+        }
+
+        $pdf->Output('I', encoding($titulo).'.pdf');
+        exit();
+    }
+
     function generalXls(Request $request){
         $anio = $request->get('anio');
         $mes = $request->get('mes');

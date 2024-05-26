@@ -5,21 +5,19 @@ namespace App\Livewire\Asistencia;
 use App\Models\Empleado;
 use App\Models\MarcacionDetalle;
 use App\Models\RolEmpleado;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class MisMarcaciones extends Component
+class BuscarMarcaciones extends Component
 {
     public $tituloPagina;
     function mount() : void {
-        $this->tituloPagina = "Mis marcaciones";
+        $this->tituloPagina = "Buscar marcaciones";
     }
-    
-    function getMarcaciones() {
-        $userId = Auth::user()->id;
-        $empleado = Empleado::where('userId', $userId)->first();
-        $marcaciones = MarcacionDetalle::select(DB::raw("DATE_FORMAT(marcacion, '%H:%i:%s') AS title"), 
+
+    function getMarcaciones($codigo) {
+        $empleado = Empleado::where('codigo', $codigo)->first();
+        $marcaciones = MarcacionDetalle::select(DB::raw("DATE_FORMAT(marcacion, '%h:%i %p') AS title"), 
                                                 DB::raw("DATE_FORMAT(marcacion, '%Y-%m-%d') AS start"))
                                             ->where('codigo', $empleado->codigo)->get()->toArray();
 
@@ -37,8 +35,9 @@ class MisMarcaciones extends Component
         
         return $data;
     }
+
     public function render()
     {
-        return view('livewire.asistencia.mis-marcaciones');
+        return view('livewire.asistencia.buscar-marcaciones');
     }
 }

@@ -5,10 +5,24 @@
             <i class="fa fa-download"></i>
             Registrar
         </button> --}}
-        <button class="btn btn-relief-primary" id="btn-xlsx">
-            <i class="fa fa-download"></i>
-            Descargar Rol
-        </button>
+        <div class="btn-group">
+            <button class="btn btn-relief-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-download"></i>
+                Descargar Rol
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" id="btn-xlsx">
+                    <i class="fa fa-file-excel"></i>
+                    Formato excel
+                </button>
+                @hasanyrole('Administrador|Recursos Humanos')
+                <button class="dropdown-item" id="btn-resumen">
+                    <i class="fa fa-file-pdf"></i>
+                    Resumen PDF
+                </button>
+                @endhasanyrole
+            </div>
+        </div>
     </x-slot>
     
 
@@ -146,6 +160,13 @@
                 let mes = $('#selectMes').val();
                 let departamento = $('#selectDep').val();
                 let ruta = @json(route('rol.general-xlsx')) + '?anio=' + anio + '&mes=' + mes + '&departamento=' + departamento;
+                window.open(ruta, '_blank');
+            })
+
+            $('#btn-resumen').click(function(){
+                let anio = $('#selectAnio').val();
+                let mes = $('#selectMes').val();
+                let ruta = @json(route('rol.resumen')) + '?anio=' + anio + '&mes=' + mes;
                 window.open(ruta, '_blank');
             })
         })
