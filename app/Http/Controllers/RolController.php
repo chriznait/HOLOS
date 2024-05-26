@@ -143,7 +143,7 @@ class RolController extends Controller
             });
         });
         $empleadosCollection = $empleadosCollection->sortBy(function ($empleado) {
-            return $empleado->empleado->cargo->ordenRolConsolidado;
+            return $empleado->empleado->cargo?->ordenRolConsolidado;
         });
 
         $diasMes = getDiasMes($anio, $mes);
@@ -223,9 +223,10 @@ class RolController extends Controller
 
             $pdf->Ln();
         } */
-        $cambioCargo = true;
+        $cargo = "";
         foreach ($empleadosCollection as $i => $empleado){
-            if($cambioCargo){
+            if($cargo != $empleado->empleado->cargo?->id){
+                $cargo = $empleado->empleado->cargo?->id;
                 $pdf->setBold(true);
                 $pdf->Cell(7, $h, '','BLR',0,'C');
                 $pdf->Cell(195+75, $h, mayusculas($empleado->empleado->cargo?->descripcion),'BLR',1);
