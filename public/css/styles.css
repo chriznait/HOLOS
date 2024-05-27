@@ -24,6 +24,9 @@
 .table-rol .hcent{
     text-align: center;
 }
+.table-rol .turno{
+    cursor: pointer;
+}
 .table-rol .vcent{
     align-content: center;
 }

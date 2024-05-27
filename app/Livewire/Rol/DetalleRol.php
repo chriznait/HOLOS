@@ -4,6 +4,7 @@ namespace App\Livewire\Rol;
 
 use App\Models\EstadoRol;
 use App\Models\Rol;
+use App\Models\RolDetalle;
 use App\Models\Turno;
 use Illuminate\Http\Request;
 use Livewire\Attributes\On;
@@ -15,18 +16,23 @@ class DetalleRol extends Component
 {
     public $tituloModal, $idModal;
     public $rol, $diasMes;
-    public $tituloModalEstado, $idModalEstado;
+    public $tituloModalEstado, $idModalEstado, $tituloModalTurno, $idModalTurno, $turnos, $rolDetalle;
     public $crud;
 
     function mount(Request $request) : void {
         $this->tituloModalEstado    = "Actualiza estado";
         $this->idModalEstado        = "mdl-actualiza-estado";
-        $this->crud = $request->attributes->get('permisos');
+        $this->tituloModalTurno     = "Actualiza turno";
+        $this->idModalTurno         = "mdl-turno";
+        $this->turnos               = Turno::all();
+        $this->crud                 = $request->attributes->get('permisos');
 
-        $this->tituloModal = "Detalle Rol";
-        $this->idModal = "mdl-rol-detalle";
-        $this->rol = new Rol();
-        $this->diasMes = [];
+        $this->tituloModal          = "Detalle Rol";
+        $this->idModal              = "mdl-rol-detalle";
+        $this->rol                  = new Rol();
+        $this->diasMes              = [];
+
+        $this->reseteaRolDetalle();
     }
     #[On('inicializaDatos')]
     function inicializaDatos($id) : void {
@@ -180,6 +186,9 @@ class DetalleRol extends Component
         return [
             'rol.validacion' => '',
             'rol.estadoId' => '',
+            'rolDetalle.rolEmpleadoId' => '',
+            'rolDetalle.turno' => '',
+            'rolDetalle.dia' => '',
         ];
     }
     function guardarEstado() : void {
@@ -217,6 +226,48 @@ class DetalleRol extends Component
         $this->dispatch('refresh')->to(Administracion::class);
     }
 
+    /*
+        TURNOS
+    */
+    function reseteaRolDetalle() : void {
+        $this->rolDetalle = new RolDetalle();
+    }
+
+    function muestraModalTurno($rolEmpleadoId, $turno, $dia) : void {
+        /* $this->reseteaRolDetalle($data); */
+        $rolDetalle = RolDetalle::where(['rolEmpleadoId' => $rolEmpleadoId, 'turno' => $turno, 'dia' => $dia])
+                                    ->first();
+        if(!is_null($rolDetalle))
+            $this->rolDetalle = $rolDetalle;
+        else{
+            $this->rolDetalle = new RolDetalle();
+            $this->rolDetalle->rolEmpleadoId    = $rolEmpleadoId;
+            $this->rolDetalle->turno            = $turno;
+            $this->rolDetalle->dia              = $dia;
+        }
+
+        $this->dispatch('openModal', $this->idModalTurno);
+    }
+    function guardarTurno() : void {
+
+        if ($this->rol->estadoId == 3 || is_null($this->rol->estadoId)){
+            if(empty($this->rolDetalle->turno) && isset($this->rolDetalle->id) && !is_null($this->rolDetalle->id)){
+                $this->rolDetalle->delete();
+            }else{
+                $this->rolDetalle->save();
+            }
+    
+            $resp['type'] = 'success';
+            $resp['message'] = 'Actualizado con exito';
+            $this->dispatch('closeModal', $this->idModalTurno);
+            $this->inicializaDatos($this->rol->id);
+            $this->resetValidation();
+        }else{
+            $resp['type'] = 'error';
+            $resp['message'] = 'No se puede actualizar un rol aprobado o pendiente';
+        }
+        $this->dispatch('alert', $resp);
+    }
     public function render()
     {
         return view('livewire.rol.detalle-rol');

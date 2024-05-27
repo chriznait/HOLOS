@@ -70,14 +70,14 @@
                             <tbody>
                                 @foreach ($departamentosRol as $departamento)
                                     <tr>
-                                        <th class="text-center departamento text-danger" colspan="{{ count($diasMes)+2 }}">
+                                        <th class="text-center departamento text-danger" colspan="{{ count($turnos) + count($diasMes)+2 }}">
                                             {{ strtoupper($departamento->descripcion) }}
                                         </th>
                                     </tr>
                                     @foreach ($departamento->servicios as $servicio)
                                         @if ($servicio->roles->count() > 0)
                                             <tr>
-                                                <th class="servicio text-primary" colspan="{{ count($diasMes)+2 }}">
+                                                <th class="servicio text-primary" colspan="{{ count($turnos) + count($diasMes)+2 }}">
                                                     {{ $servicio->descripcion }}
                                                 </th>
                                             </tr>

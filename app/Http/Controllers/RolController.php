@@ -138,7 +138,7 @@ class RolController extends Controller
                     ->where(['anio' => $anio, 'mes' => $mes, 'estadoId' => 2])
                     ->get();
         $empleadosCollection = $roles->flatMap(function ($rol) {
-            return $rol->empleados->map(function ($empleado) use ($rol) {
+            return $rol->empleados->map(function ($empleado) {
                 return $empleado; // Devuelve el empleado directamente
             });
         });

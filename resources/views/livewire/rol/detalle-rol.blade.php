@@ -105,6 +105,8 @@
                                 @foreach ($diasMes as $i => $dia)
                                     @php
                                         $turno = "";
+                                        $dia = $i;
+                                        $rolEmpleadoId = $empleado->id;
                                         foreach ($empleado->detalles as $detalle) {
                                             if($detalle->dia == $i) {
                                                 $turno = $detalle->turno;
@@ -112,7 +114,15 @@
                                             }
                                         }
                                     @endphp
-                                    <td class="hcent">{{ $turno }}</td>
+                                    @if ($rol->estadoId == 3 || is_null($rol->estadoId))
+                                        <td wire:click="muestraModalTurno({{ $rolEmpleadoId }}, '{{ $turno }}', {{ $dia }})" class="hcent turno">
+                                            {{ $turno }}
+                                        </td>
+                                    @else
+                                        <td class="hcent turno">
+                                            {{ $turno }}
+                                        </td>
+                                    @endif
                                 @endforeach
                                 <td class="hcent">{{ $totalHoras }}</td>
                             </tr>
@@ -156,36 +166,48 @@
     <x-modal :modalTitulo="$tituloModalEstado" :modalId="$idModalEstado" guardar="guardarEstado">
         <x-form-text-area label="Observación" model="rol.validacion" wire:model="rol.validacion" lcol="3"/>
     </x-modal>
+    <x-modal :modalTitulo="$tituloModalTurno" :modalId="$idModalTurno" guardar="guardarTurno" tipo="modal-lg">
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <tbody>
+                    @foreach ($turnos as $i => $turno)
+                        @if ($i % 2 == 0)
+                        <tr>
+                        @endif
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" 
+                                        type="radio" 
+                                        name="inlineRadioOptions" 
+                                        id="inlineRadio{{ $turno->id }}" 
+                                        value="{{ $turno->abrev }}"
+                                        wire:model="rolDetalle.turno"
+                                    >
+                                </div>
+                            </td>
+                            <td>{{ '('.$turno->abrev.') '.$turno->descripcion }}</td>
+                        @if ($i % 2 != 0 || ($i+1) == $turnos->count())
+                        </tr>
+                        @endif
+                    @endforeach
+                    <tr>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" 
+                                    type="radio" 
+                                    name="inlineRadioOptions" 
+                                    id="inlineRadio0" 
+                                    value=""
+                                    wire:model="rolDetalle.turno"
+                                >
+                            </div>
+                        </td>
+                        <td class="text-danger"><b>Sin turno</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </x-modal>
     @livewire('rol.subir-rol')
 
 </div>
-@script
-<script>
-    Alpine.data('counter', () => {
-        return {
-            estados : {
-                2: 'aprobar',
-                3: 'rechazar',
-            },
-            confirmaEstado(idEstado) {
-                Swal.fire({
-                    text: `¿Seguro que desea ${this.estados[idEstado]}?`,
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Si, continuar',
-                    cancelButtonText: 'Cancelar',
-                    customClass: {
-                        confirmButton: 'btn btn-primary',
-                        cancelButton: 'btn btn-outline-danger'
-                    },
-                    buttonsStyling: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        @this.setEstado(idEstado);
-                    }
-                });
-            },
-        }
-    })
-</script>
-@endscript
