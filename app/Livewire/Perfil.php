@@ -32,7 +32,7 @@ class Perfil extends Component
                 'password2' => 'required'
             ]);
             if(Hash::check($this->password, $this->user->password)){
-                $this->user->password = Hash::make('password1');
+                $this->user->password = Hash::make($this->password1);
                 $this->user->save();
 
                 $this->password = "";

@@ -18,6 +18,7 @@ class DetalleRol extends Component
     public $rol, $diasMes;
     public $tituloModalEstado, $idModalEstado, $tituloModalTurno, $idModalTurno, $turnos, $rolDetalle;
     public $crud;
+    public $turnosExistentes;
 
     function mount(Request $request) : void {
         $this->tituloModalEstado    = "Actualiza estado";
@@ -25,6 +26,7 @@ class DetalleRol extends Component
         $this->tituloModalTurno     = "Actualiza turno";
         $this->idModalTurno         = "mdl-turno";
         $this->turnos               = Turno::all();
+        $this->turnosExistentes     = [];
         $this->crud                 = $request->attributes->get('permisos');
 
         $this->tituloModal          = "Detalle Rol";
@@ -37,6 +39,17 @@ class DetalleRol extends Component
     #[On('inicializaDatos')]
     function inicializaDatos($id) : void {
         $this->rol = Rol::with('empleados.detalles.rTurno')->find($id);
+
+        $this->turnosExistentes = Rol::select('RD.turno')
+                                        ->from('rol_personal as R')
+                                        ->join('rol_personal_empleado as RE', 'RE.rolId', '=', 'R.id')
+                                        ->join('rol_personal_detalle as RD', 'RD.rolEmpleadoId', '=', 'RE.id')
+                                        ->where('R.id', $id)
+                                        ->groupBy('RD.turno')->get()->map(function($item){
+                                            $item->cantidad = 0;
+                                            return $item;
+                                        });
+
         $this->diasMes = getDiasMes($this->rol->anio, $this->rol->mes);
     }
     #[On('muestraDetalle')]

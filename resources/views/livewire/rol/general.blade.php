@@ -90,6 +90,7 @@
                                                     @foreach ($turnos as $turno)
                                                         <th rowspan="2" class="vcent hcent">{{ $turno->turno }}</th>    
                                                     @endforeach
+                                                    <th rowspan="2" class="vcent hcent">Turnos</th>
                                                 @endhasanyrole
                                                 <th rowspan="2" class="vcent hcent">Total <br> Horas</th>
                                             </tr>
@@ -137,6 +138,7 @@
                                                         @foreach ($turnos as $turno)
                                                             <th class="vcent hcent">{{ $turno->cantidad }}</th>    
                                                         @endforeach
+                                                        <td class="hcent">{{ $totalHoras/6 }}</td>
                                                     @endhasanyrole
                                                     <td class="hcent">{{ $totalHoras }}</td>
                                                 </tr>

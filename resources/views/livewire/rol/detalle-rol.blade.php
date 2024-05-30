@@ -84,8 +84,14 @@
                             <th rowspan="2" class="vcent">DNI</th>
                             <th rowspan="2" class="vcent">NOMBRES</th>
                             @foreach ($diasMes as $i => $dia)
-                                <th class="hcent">{{ $i }}</th>
+                                <th class="hcent w20">{{ $i }}</th>
                             @endforeach
+                            @hasanyrole('Administrador|Jefe Servicio|Jefe departamento|Recursos Humanos')
+                                @foreach ($turnosExistentes as $turnoe)
+                                    <th rowspan="2" class="vcent hcent w20">{{ $turnoe->turno }}</th>    
+                                @endforeach
+                                <th rowspan="2" class="vcent hcent">Turnos</th>
+                            @endhasanyrole
                             <th rowspan="2" class="vcent hcent">Total <br> Horas</th>
                         </tr>
                         <tr>
@@ -98,7 +104,7 @@
                         @foreach ($rol->empleados as $empleado)
                             <tr>
                                 <td>{{ $empleado->empleado->nroDocumento }}</td>
-                                <td>{{ $empleado->empleado->nombreCompleto() }}</td>
+                                <td class="text-nowrap">{{ $empleado->empleado->nombreCompleto() }}</td>
                                 @php
                                     $totalHoras = 0;
                                 @endphp
@@ -111,6 +117,13 @@
                                             if($detalle->dia == $i) {
                                                 $turno = $detalle->turno;
                                                 $totalHoras += $detalle->rTurno?->horas;
+
+                                                $turnosExistentes->transform(function ($item) use ($turno) {
+                                                    if ($item->turno === $turno) {
+                                                        $item->cantidad++;
+                                                    }
+                                                    return $item;
+                                                });
                                             }
                                         }
                                     @endphp
@@ -124,6 +137,12 @@
                                         </td>
                                     @endif
                                 @endforeach
+                                @hasanyrole('Administrador|Jefe Servicio|Jefe departamento|Recursos Humanos')
+                                    @foreach ($turnosExistentes as $turnoe)
+                                        <th class="vcent hcent">{{ $turnoe->cantidad }}</th>    
+                                    @endforeach
+                                    <td class="hcent">{{ $totalHoras/6 }}</td>
+                                @endhasanyrole
                                 <td class="hcent">{{ $totalHoras }}</td>
                             </tr>
                         @endforeach
