@@ -32,14 +32,14 @@
                 <div class="card-header">
                     <form wire:submit="cargarRoles">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <select class="form-select" id="selectAnio" wire:model="filAnio">
                                     @foreach ($anios as $key => $name)
                                     <option value="{{ $key }}">{{ $name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <select class="form-select" id="selectMes" wire:model="filMes">
                                     @foreach ($meses as $key => $name)
                                     <option value="{{ $key }}">{{ $name }}</option>
@@ -55,6 +55,9 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
+                                <input type="text" class="form-control" wire:model="filText" placeholder="Buscar...">
+                            </div>
+                            <div class="col-md-2">
                                 <button type="submit" class="btn btn-relief-dark" wire:loading.attr="disabled">
                                     <span wire:loading wire:target="cargarRoles" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     <i class="fa fa-search"></i>

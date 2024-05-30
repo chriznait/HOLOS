@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class General extends Component
 {
     public $tituloPagina;
-    public $user, $empleado, $filMes, $filAnio, $filDepartamento;
+    public $user, $empleado, $filMes, $filAnio, $filDepartamento, $filText;
     public $departamentos, $anios, $meses;
     public $departamentosRol;
     public $diasMes;
@@ -24,6 +24,7 @@ class General extends Component
         $this->filMes               = (int) date('m');
         $this->filAnio              = (int) date('Y');
         $this->filDepartamento      = "";
+        $this->filText              = "";
         $this->user                 = User::find(auth()->user()->id);
         $this->empleado             = $this->user->empleado;
 
@@ -56,8 +57,14 @@ class General extends Component
                                 ->where('mes', $this->filMes)
                                 ->when(!empty($this->filDepartamento), function($qq){
                                     $qq->where('departamentoId', $this->filDepartamento);
+                                })
+                                ->when(!empty($this->filText), function($qq){
+                                    $qq->wherehas('empleados.empleado', function($qqq){
+                                        $qqq->search($this->filText);
+                                    });
                                 });
                         })
+                        ->orderBy('descripcion')
                         ->get();
 
         $this->turnos = Rol::select('RD.turno')
