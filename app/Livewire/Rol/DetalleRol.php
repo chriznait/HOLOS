@@ -36,9 +36,7 @@ class DetalleRol extends Component
 
         $this->reseteaRolDetalle();
     }
-    #[On('inicializaDatos')]
-    function inicializaDatos($id) : void {
-        $this->rol = Rol::with('empleados.detalles.rTurno')->find($id);
+    function turnosExistentes($id) : void {
 
         $this->turnosExistentes = Rol::select('RD.turno')
                                         ->from('rol_personal as R')
@@ -49,8 +47,12 @@ class DetalleRol extends Component
                                             $item->cantidad = 0;
                                             return $item;
                                         });
-
+    }
+    #[On('inicializaDatos')]
+    function inicializaDatos($id) : void {
+        $this->rol = Rol::with('empleados.detalles.rTurno')->find($id);
         $this->diasMes = getDiasMes($this->rol->anio, $this->rol->mes);
+        $this->turnosExistentes($id);
     }
     #[On('muestraDetalle')]
     function mostrarDetalle($id) : void {
@@ -258,12 +260,12 @@ class DetalleRol extends Component
             $this->rolDetalle->turno            = $turno;
             $this->rolDetalle->dia              = $dia;
         }
-
+        $this->turnosExistentes($this->rol->id);
         $this->dispatch('openModal', $this->idModalTurno);
     }
     function guardarTurno() : void {
 
-        if ($this->rol->estadoId == 3 || is_null($this->rol->estadoId)){
+        if ($this->rol->estadoId != 2){
             if(empty($this->rolDetalle->turno) && isset($this->rolDetalle->id) && !is_null($this->rolDetalle->id)){
                 $this->rolDetalle->delete();
             }else{
@@ -275,11 +277,13 @@ class DetalleRol extends Component
             $this->dispatch('closeModal', $this->idModalTurno);
             $this->inicializaDatos($this->rol->id);
             $this->resetValidation();
+            $this->dispatch('alert', $resp);
         }else{
-            $resp['type'] = 'error';
-            $resp['message'] = 'No se puede actualizar un rol aprobado o pendiente';
+            /* $resp['type'] = 'error';
+            $resp['message'] = 'No se puede actualizar un rol aprobado'; */
+            $this->addError('invalido', 'No se puede actualizar un rol aprobado');
         }
-        $this->dispatch('alert', $resp);
+        
     }
     public function render()
     {

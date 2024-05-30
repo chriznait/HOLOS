@@ -127,7 +127,7 @@
                                             }
                                         }
                                     @endphp
-                                    @if ($rol->estadoId == 3 || is_null($rol->estadoId))
+                                    @if ($rol->estadoId != 2)
                                         <td wire:click="muestraModalTurno({{ $rolEmpleadoId }}, '{{ $turno }}', {{ $dia }})" class="hcent turno">
                                             {{ $turno }}
                                         </td>
@@ -186,6 +186,15 @@
         <x-form-text-area label="Observación" model="rol.validacion" wire:model="rol.validacion" lcol="3"/>
     </x-modal>
     <x-modal :modalTitulo="$tituloModalTurno" :modalId="$idModalTurno" guardar="guardarTurno" tipo="modal-lg">
+        @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <div class="alert-body">
+                @foreach ($errors->all() as $error)
+                    <span>{{ $error }}</span></br>
+                @endforeach
+            </div>
+        </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-sm">
                 <tbody>
