@@ -43,6 +43,7 @@ class DetalleRol extends Component
                                         ->join('rol_personal_empleado as RE', 'RE.rolId', '=', 'R.id')
                                         ->join('rol_personal_detalle as RD', 'RD.rolEmpleadoId', '=', 'RE.id')
                                         ->where('R.id', $id)
+                                        ->orderBy('RD.turno')
                                         ->groupBy('RD.turno')->get()->map(function($item){
                                             $item->cantidad = 0;
                                             return $item;

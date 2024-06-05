@@ -75,7 +75,8 @@ class General extends Component
                             ->where('R.mes', $this->filMes)
                             ->when(!empty($this->filDepartamento), function($qq){
                                 $qq->where('R.departamentoId', $this->filDepartamento);
-                            })->groupBy('RD.turno')->get()->map(function($item){
+                            })->orderBy('RD.turno')
+                            ->groupBy('RD.turno')->get()->map(function($item){
                                 $item->cantidad = 0;
                                 return $item;
                             });
