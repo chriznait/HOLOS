@@ -87,11 +87,11 @@
                                             <tr>
                                                 <th rowspan="2" class="vcent">NOMBRES</th>
                                                 @foreach ($diasMes as $i => $dia)
-                                                    <th class="hcent">{{ $i }}</th>
+                                                    <th class="hcent cab-rol">{{ $i }}</th>
                                                 @endforeach
                                                 @hasanyrole('Administrador|Jefe Servicio|Jefe departamento|Recursos Humanos')
                                                     @foreach ($turnos as $turno)
-                                                        <th rowspan="2" class="vcent hcent">{{ $turno->turno }}</th>    
+                                                        <th rowspan="2" class="vcent hcent cab-rol">{{ $turno->turno }}</th>    
                                                     @endforeach
                                                     <th rowspan="2" class="vcent hcent">Turnos</th>
                                                 @endhasanyrole

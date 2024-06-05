@@ -107,6 +107,10 @@
                                 <td class="text-nowrap">{{ $empleado->empleado->nombreCompleto() }}</td>
                                 @php
                                     $totalHoras = 0;
+                                    $turnosExistentes->transform(function ($item) {
+                                        $item->cantidad = 0;
+                                        return $item;
+                                    });
                                 @endphp
                                 @foreach ($diasMes as $i => $dia)
                                     @php
