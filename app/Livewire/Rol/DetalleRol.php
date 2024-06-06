@@ -3,9 +3,11 @@
 namespace App\Livewire\Rol;
 
 use App\Models\EstadoRol;
+use App\Models\Parametros;
 use App\Models\Rol;
 use App\Models\RolDetalle;
 use App\Models\Turno;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -19,6 +21,7 @@ class DetalleRol extends Component
     public $tituloModalEstado, $idModalEstado, $tituloModalTurno, $idModalTurno, $turnos, $rolDetalle;
     public $crud;
     public $turnosExistentes;
+    public $fechaLimite;
 
     function mount(Request $request) : void {
         $this->tituloModalEstado    = "Actualiza estado";
@@ -33,8 +36,16 @@ class DetalleRol extends Component
         $this->idModal              = "mdl-rol-detalle";
         $this->rol                  = new Rol();
         $this->diasMes              = [];
-
         $this->reseteaRolDetalle();
+    }
+    function asignaFechaLimite() : void {
+        $parametro = Parametros::find(4); //id de parametro de dias maximo para rol
+        if(!is_null($parametro)){
+            $primerDia = Carbon::create($this->rol->anio, $this->rol->mes, 1);
+            $this->fechaLimite = $primerDia->addDays($parametro->valor);
+        }else{
+
+        }
     }
     function turnosExistentes($id) : void {
 
@@ -52,7 +63,9 @@ class DetalleRol extends Component
     #[On('inicializaDatos')]
     function inicializaDatos($id) : void {
         $this->rol = Rol::with('empleados.detalles.rTurno')->find($id);
+        $this->rol->respetaFechaLimite = $this->rol->respetaFechaLimite == 1 ? true : false;
         $this->diasMes = getDiasMes($this->rol->anio, $this->rol->mes);
+        $this->asignaFechaLimite();
         $this->turnosExistentes($id);
     }
     #[On('muestraDetalle')]
@@ -202,6 +215,7 @@ class DetalleRol extends Component
         return [
             'rol.validacion' => '',
             'rol.estadoId' => '',
+            'rol.respetaFechaLimite' => '',
             'rolDetalle.rolEmpleadoId' => '',
             'rolDetalle.turno' => '',
             'rolDetalle.dia' => '',
@@ -251,18 +265,24 @@ class DetalleRol extends Component
 
     function muestraModalTurno($rolEmpleadoId, $turno, $dia) : void {
         /* $this->reseteaRolDetalle($data); */
-        $rolDetalle = RolDetalle::where(['rolEmpleadoId' => $rolEmpleadoId, 'turno' => $turno, 'dia' => $dia])
-                                    ->first();
-        if(!is_null($rolDetalle))
-            $this->rolDetalle = $rolDetalle;
-        else{
-            $this->rolDetalle = new RolDetalle();
-            $this->rolDetalle->rolEmpleadoId    = $rolEmpleadoId;
-            $this->rolDetalle->turno            = $turno;
-            $this->rolDetalle->dia              = $dia;
+
+        $resp = $this->validaFechaLimite();
+        if(empty($resp)){
+            $rolDetalle = RolDetalle::where(['rolEmpleadoId' => $rolEmpleadoId, 'turno' => $turno, 'dia' => $dia])
+                                        ->first();
+            if(!is_null($rolDetalle))
+                $this->rolDetalle = $rolDetalle;
+            else{
+                $this->rolDetalle = new RolDetalle();
+                $this->rolDetalle->rolEmpleadoId    = $rolEmpleadoId;
+                $this->rolDetalle->turno            = $turno;
+                $this->rolDetalle->dia              = $dia;
+            }
+            $this->dispatch('openModal', $this->idModalTurno);
+        }else{
+            $this->dispatch('alert', $resp);
         }
         $this->turnosExistentes($this->rol->id);
-        $this->dispatch('openModal', $this->idModalTurno);
     }
     function guardarTurno() : void {
 
@@ -285,6 +305,37 @@ class DetalleRol extends Component
             $this->addError('invalido', 'No se puede actualizar un rol aprobado');
         }
         
+    }
+    /*
+
+    */
+    function muestraSubirRol() : void {
+        $resp = $this->validaFechaLimite();
+        if(empty($resp)){
+            $this->dispatch('muestraSubirRol', id: $this->rol->id)->to('rol.subir-rol');
+        }else{
+            $this->dispatch('alert', $resp);
+            $this->turnosExistentes($this->rol->id);
+        }
+    }
+    function validaFechaLimite() : array {
+        $fechaActual = Carbon::now();
+        $fechaLimite = $this->fechaLimite;
+        if($fechaActual->lessThanOrEqualTo($fechaLimite) || !$this->rol->respetaFechaLimite){
+            $resp = [];
+        }else{
+            $resp['type'] = 'error';
+            $resp['message'] = 'Fecha limite excedido';
+        }
+        return $resp;
+    }
+    function updated($name, $value) : void {
+        if($name == 'rol.respetaFechaLimite'){
+            Rol::where('id', $this->rol->id)
+                    ->update(['respetaFechaLimite' => $value]);
+                    
+            $this->turnosExistentes($this->rol->id);
+        }
     }
     public function render()
     {

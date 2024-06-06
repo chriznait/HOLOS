@@ -116,6 +116,10 @@
                                                     </td>
                                                     @php
                                                         $totalHoras = 0;
+                                                        $turnos->transform(function ($item) use ($turno) {
+                                                            $item->cantidad = 0;
+                                                            return $item;
+                                                        });
                                                     @endphp
                                                     @foreach ($diasMes as $i => $dia)
                                                         @php

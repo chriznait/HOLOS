@@ -14,7 +14,6 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class RolController extends Controller
 {
     function pdf($idRol) : void {
-
         $rol = Rol::with('empleados.detalles.rTurno')->find($idRol);
         $diasMes = getDiasMes($rol->anio, $rol->mes);
         $titulo = $rol->departamento->descripcion.' - '.$rol->servicio->descripcion.' ('.$rol->mes().' '.$rol->anio.')';
@@ -39,7 +38,8 @@ class RolController extends Controller
         $pdf->setFontSize($size1);
         $pdf->Cell(0, $h, $parametros[0]['valor'], 0, 1, 'C');
         /* $pdf->Cell(0, $h, $parametros[1]['valor'], 1, 1, 'C'); */
-        $pdf->Ln();
+        //$pdf->Image(public_path('images/logo alto inclan_h.png'), 235, 4, 50, 0, 'PNG');
+        $pdf->Ln(); 
 
         $pdf->setFontSize($size2);
         $pdf->setBold(true);

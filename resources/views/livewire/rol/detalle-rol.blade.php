@@ -56,6 +56,21 @@
                             {{ $rol->validacion }}
                         </td>
                     </tr>
+                    <tr>
+                        <th class="text-danger">Fecha Límite</th>
+                        {{-- <th colspan="5" class="text-danger">{{ date('d/m/Y', strtotime($fechaLimite)) }}</th> --}}
+                        <td class="text-danger">
+                            <b>{{ $fechaLimite?->format('d/m/Y') }}</b>
+                        </td>
+                        <td colspan="4">
+                            @hasanyrole('Administrador|Recursos Humanos')
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" wire:model.live="rol.respetaFechaLimite">
+                                <label class="form-check-label" for="inlineCheckbox1">Respeta fecha limite para subir rol</label>
+                            </div>
+                            @endhasanyrole
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="btn-group">
@@ -71,7 +86,10 @@
                         <i class="fa-solid fa-file-arrow-down"></i>
                         Descargar formato
                     </button>
-                    <button class="btn btn-flat-dark" wire:click="$dispatchTo('rol.subir-rol', 'muestraSubirRol', { id: {{ $rol->id }} })">
+                    <button class="btn btn-flat-dark" 
+                        {{-- wire:click="$dispatchTo('rol.subir-rol', 'muestraSubirRol', { id: {{ $rol->id }} })" --}}
+                        wire:click="muestraSubirRol"
+                    >
                         <i class="fa-solid fa-file-arrow-up"></i>
                         Subir Formato
                     </button>
