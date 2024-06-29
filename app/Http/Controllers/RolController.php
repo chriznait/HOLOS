@@ -326,9 +326,9 @@ class RolController extends Controller
         $size2 = 9;
         $size3 = 7;
         /*277*/
-        $h = 4;
-        $h2 = 8;
-        $h3 = 12;
+        $h = 3;
+        $h2 = 6;
+        $h3 = 8;
 
         $pdf = new CustomPdf('L', 'mm', 'A4');
         $pdf->AddPage();

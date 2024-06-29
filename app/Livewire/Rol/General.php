@@ -28,11 +28,12 @@ class General extends Component
         $this->user                 = User::find(auth()->user()->id);
         $this->empleado             = $this->user->empleado;
 
-        if($this->user->hasPermissionTo(5)){
+        /* if($this->user->hasPermissionTo(5)){
             $this->departamentos = select_values('departamento_hospital', 'descripcion', [], ['descripcion', 'asc']);
         }else{
             $this->departamentos = select_values('departamento_hospital', 'descripcion', ['id', $this->empleado->departamentoId], ['descripcion', 'asc']);
-        }
+        } */
+        $this->departamentos = select_values('departamento_hospital', 'descripcion', [], ['descripcion', 'asc']);
         $this->anios = getAnios();
         $this->meses = getMeses();
         $this->departamentosRol = [];
