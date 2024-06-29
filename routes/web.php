@@ -53,6 +53,7 @@ Route::group(['middleware'=> 'auth'],function() {
 
         Route::get('pdf/{idRol}', [App\Http\Controllers\RolController::class, 'pdf'])->name('rol.pdf');
         Route::get('general-xlsx/', [App\Http\Controllers\RolController::class, 'generalXls'])->name('rol.general-xlsx');
+        Route::get('general-pdf/', [App\Http\Controllers\RolController::class, 'generalPdf'])->name('rol.general-pdf');
         Route::get('resumen/', [App\Http\Controllers\RolController::class, 'resumenRol'])->name('rol.resumen');
     });
     Route::prefix('configuracion')->group(function () {

@@ -15,6 +15,10 @@
                     <i class="fa fa-file-excel"></i>
                     Formato excel
                 </button>
+                <button class="dropdown-item" id="btn-pdf">
+                    <i class="fa fa-file-pdf"></i>
+                    Formato Pdf
+                </button>
                 @hasanyrole('Administrador|Recursos Humanos')
                 <button class="dropdown-item" id="btn-resumen">
                     <i class="fa fa-file-pdf"></i>
@@ -55,7 +59,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" wire:model="filText" placeholder="Buscar...">
+                                <input type="text" class="form-control" wire:model="filText" placeholder="Buscar..." id="inputSearch">
                             </div>
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-relief-dark" wire:loading.attr="disabled">
@@ -103,12 +107,13 @@
                                                 @endforeach
                                             </tr>
                                             @foreach ($servicio->roles[0]->empleados as $empleado)
-                                            @php
-                                                $turnos->transform(function ($item) {
-                                                    $item->cantidad = 0;
-                                                    return $item;
-                                                });
-                                            @endphp
+                                                @if (!is_null($empleado->empleado))
+                                                @php
+                                                    $turnos->transform(function ($item) {
+                                                        $item->cantidad = 0;
+                                                        return $item;
+                                                    });
+                                                @endphp
                                                 <tr>
                                                     <td style="white-space: nowrap;">
                                                         {{ strtoupper($empleado->empleado->nombreCompleto()) }}<br>
@@ -149,6 +154,8 @@
                                                     @endhasanyrole
                                                     <td class="hcent">{{ $totalHoras }}</td>
                                                 </tr>
+                                                @endif
+                                                
                                             @endforeach
                                         @endif
                                     @endforeach
@@ -169,6 +176,14 @@
                 let mes = $('#selectMes').val();
                 let departamento = $('#selectDep').val();
                 let ruta = @json(route('rol.general-xlsx')) + '?anio=' + anio + '&mes=' + mes + '&departamento=' + departamento;
+                window.open(ruta, '_blank');
+            })
+            $('#btn-pdf').click(function(){
+                let anio = $('#selectAnio').val();
+                let mes = $('#selectMes').val();
+                let departamento = $('#selectDep').val();
+                let search = $('#inputSearch').val();
+                let ruta = @json(route('rol.general-pdf')) + '?anio=' + anio + '&mes=' + mes + '&departamento=' + departamento + '&search=' + search;
                 window.open(ruta, '_blank');
             })
 

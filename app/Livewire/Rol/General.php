@@ -40,18 +40,23 @@ class General extends Component
     }
     function cargarRoles() : void {
         $this->diasMes = getDiasMes($this->filAnio, $this->filMes);
-        $this->departamentosRol = DepartamentoHospital::with([
-                            'servicios.roles' => function($q){
-                                $q->with('empleados.detalles.rTurno')
-                                    ->where('estadoId', 2)
-                                    ->where('anio', $this->filAnio)
-                                    ->where('mes', $this->filMes)
-                                    ->when(!empty($this->filDepartamento), function($qq){
-                                        $qq->where('departamentoId', $this->filDepartamento);
-                                    });
-                            }
-                        ])
-                        ->whereHas('servicios.roles', function($q){
+        /* $roles = Rol::with(['empleados.empleado' => function($q){
+                            $q->search($this->filText);
+                        }])
+                        ->where(['anio' => $this->filAnio, 'mes' => $this->filMes, 'estadoId' => 2])
+                        ->when(!empty($this->filDepartamento), function($q){
+                            $q->where('departamentoId', $this->filDepartamento);
+                        })
+                        ->whereHas('empleados.empleado', function($q){
+                            $q->search($this->filText);
+                        })
+                        ->get()->toArray();
+                    
+        dd($roles); */
+
+        
+        $departamentosRol = DepartamentoHospital::
+                        whereHas('servicios.roles', function($q){
                             $q->where('estadoId', 2)
                                 ->where('anio', $this->filAnio)
                                 ->where('mes', $this->filMes)
@@ -64,8 +69,46 @@ class General extends Component
                                     });
                                 });
                         })
+                        ->with(['servicios.roles' => function($q){
+                                $q->with('empleados.detalles.rTurno')
+                                    ->where('estadoId', 2)
+                                    ->where('anio', $this->filAnio)
+                                    ->where('mes', $this->filMes)
+                                    ->when(!empty($this->filDepartamento), function($qq){
+                                        $qq->where('departamentoId', $this->filDepartamento);
+                                    })
+                                    ->when(!empty($this->filText), function($qq){
+                                        $qq->with('empleados.empleado', function($qqq){
+                                            $qqq->search($this->filText);
+                                        });
+                                    });
+                            }
+                        ])
                         ->orderBy('descripcion')
                         ->get();
+
+
+        $departamentosRol->each(function ($departamento) {
+            $departamento->setRelation('servicios', $departamento->servicios->filter(function ($servicio) {
+                // Filtrar roles que no tienen empleados con empleado
+                $servicio->setRelation('roles', $servicio->roles->filter(function ($rol) {
+                    $rol->setRelation('empleados', $rol->empleados->filter(function ($empleado) {
+                        return $empleado->empleado !== null;
+                    }));
+                    return $rol->empleados->isNotEmpty();
+                }));
+                return $servicio->roles->isNotEmpty();
+            }));
+        });
+
+        // Eliminar los departamentos que no tienen servicios después del filtrado
+        $departamentosRol = $departamentosRol->filter(function ($departamento) {
+            return $departamento->servicios->isNotEmpty();
+        });
+        
+        $this->departamentosRol = $departamentosRol;
+        
+
 
         $this->turnos = Rol::select('RD.turno')
                             ->from('rol_personal as R')

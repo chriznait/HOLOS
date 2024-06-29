@@ -110,6 +110,7 @@ class RolController extends Controller
             foreach ($diasMes as $i => $dia) {
                 $turno = "";
                 foreach ($empleado->detalles as $detalle) {
+
                     if($detalle->dia == $i) {
                         $turno = $detalle->turno;
                         $totalHoras += $detalle->rTurno->horas;
@@ -183,8 +184,6 @@ class RolController extends Controller
         foreach ($diasMes as $i => $dia) {
             $pdf->Cell($w, $h3/2, $i,1,0,'C',1);
         }
-        /* $pdf->Cell($w, $h3, '',1,0,'C',1); */
-        /* $pdf->RotatedText($pdf->getX()-1.5,$pdf->getY()+$h3-1,'Horas',90); */
 
         $y = $pdf->getY();
         $pdf->Ln();
@@ -254,6 +253,177 @@ class RolController extends Controller
 
         $pdf->Output('I', encoding($titulo).'.pdf');
         exit();
+    }
+
+    function generalPdf(Request $request) {
+        $anio = $request->get('anio');
+        $mes = $request->get('mes');
+        $idDepartamento = $request->get('departamento');
+        $search = $request->get('search');
+
+        $meses = getMeses();
+
+        $departamentosRol = DepartamentoHospital::
+                        whereHas('servicios.roles', function($q) use ($anio, $mes, $idDepartamento, $search) {
+                            $q->where('estadoId', 2)
+                                ->where('anio', $anio)
+                                ->where('mes', $mes)
+                                ->when(!empty($idDepartamento), function($qq) use ($idDepartamento){
+                                    $qq->where('departamentoId', $idDepartamento);
+                                })
+                                ->when(!empty($search), function($qq) use ($search) {
+                                    $qq->wherehas('empleados.empleado', function($qqq) use ($search){
+                                        $qqq->search($search);
+                                    });
+                                });
+                        })
+                        ->with(['servicios.roles' => function($q) use ($anio, $mes, $idDepartamento, $search){
+                                $q->with('empleados.detalles.rTurno')
+                                    ->where('estadoId', 2)
+                                    ->where('anio', $anio)
+                                    ->where('mes', $mes)
+                                    ->when(!empty($idDepartamento), function($qq) use ($idDepartamento){
+                                        $qq->where('departamentoId', $idDepartamento);
+                                    })
+                                    ->when(!empty($search), function($qq) use ($search){
+                                        $qq->with('empleados.empleado', function($qqq) use ($search){
+                                            $qqq->search($search);
+                                        });
+                                    });
+                            }
+                        ])
+                        ->orderBy('descripcion')
+                        ->get();
+
+
+        $departamentosRol->each(function ($departamento) {
+            $departamento->setRelation('servicios', $departamento->servicios->filter(function ($servicio) {
+                // Filtrar roles que no tienen empleados con empleado
+                $servicio->setRelation('roles', $servicio->roles->filter(function ($rol) {
+                    $rol->setRelation('empleados', $rol->empleados->filter(function ($empleado) {
+                        return $empleado->empleado !== null;
+                    }));
+                    return $rol->empleados->isNotEmpty();
+                }));
+                return $servicio->roles->isNotEmpty();
+            }));
+        });
+
+        // Eliminar los departamentos que no tienen servicios después del filtrado
+        $departamentosRol = $departamentosRol->filter(function ($departamento) {
+            return $departamento->servicios->isNotEmpty();
+        });
+
+
+
+        $diasMes = getDiasMes($anio, $mes);
+        $titulo = 'Rol General ('.$meses[$mes].' '.$anio.')';
+
+        $w = 195/(count($diasMes));
+
+        $parametros = Parametros::all()->toArray();
+        $size1 = 12;
+        $size2 = 9;
+        $size3 = 7;
+        /*277*/
+        $h = 4;
+        $h2 = 8;
+        $h3 = 12;
+
+        $pdf = new CustomPdf('L', 'mm', 'A4');
+        $pdf->AddPage();
+        $pdf->AliasNbPages();
+        $pdf->SetTitle(encoding($titulo));
+
+        $pdf->SetFillColor(247,201,91);
+
+        $pdf->setFont('Courier');
+        $this->cabeceraGeneralPdf($pdf, $h, $h3, $size1, $size2, $w, $diasMes, $meses, $mes, $anio, $parametros);
+
+        foreach ($departamentosRol as $dep) {
+            $pdf->setBold(true);
+            $pdf->setFontSize($size2);
+            $pdf->setTextColorType("danger");
+            $pdf->Cell(0, $h2, encoding($dep->descripcion),1,1,'C');
+            $pdf->setBold(false);
+            foreach ($dep->servicios as $serv) {
+                $pdf->setBold(true);
+                $pdf->setTextColorType("primary");
+                $pdf->setFontSize($size2);
+                $pdf->Cell(0, $h, encoding($serv->descripcion),1,1);
+                $pdf->setBold(false);
+
+                $pdf->setTextColorType();
+                $pdf->setFontSize($size3);
+                
+                foreach ($serv->roles[0]->empleados as $i => $empleado){
+                    
+                    if(round($pdf->GetPageHeight(),2)-round($pdf->GetY(),2) <= 31){
+                        $pdf->AddPage();
+                        $this->cabeceraGeneralPdf($pdf, $h, $h3, $size1, $size2, $w, $diasMes, $meses, $mes, $anio, $parametros);
+                    }
+                    $pdf->Cell(7, $h2, ($i+1),1,0,'C');
+        
+                    $x = $pdf->getX();
+                    $y = $pdf->getY();
+                    $pdf->Cell(75, $h2/2, mayusculas($empleado->empleado->nombreCompleto()),0,1);
+        
+                    $pdf->SetX($x);
+                    $pdf->Cell(75, $h2/2, mayusculas($empleado->empleado->cargo?->descripcion),'B');
+                    $pdf->SetXY($x+75, $y);
+                    $totalHoras = 0;
+                    foreach ($diasMes as $i => $dia) {
+                        $turno = "";
+                        foreach ($empleado->detalles as $detalle) {
+                            if($detalle->dia == $i) {
+                                $turno = $detalle->turno;
+                                $totalHoras += $detalle->rTurno->horas;
+                            }
+                        }
+                        $pdf->Cell($w, $h2, $turno,1,0,'C');
+                    }
+        
+                    $pdf->Ln();
+                }
+            }
+        }
+
+        $pdf->Output('I', encoding($titulo).'.pdf');
+        exit();
+
+    }
+    
+    function cabeceraGeneralPdf($pdf, $h, $h3, $size1, $size2, $w, $diasMes, $meses, $mes, $anio, $parametros) : void {
+        
+        $pdf->setFontSize($size1);
+        $pdf->setBold(true);
+        $pdf->Cell(0, $h, 'PROGRAMACION DE PERSONAL', 0, 1, 'C');
+        $pdf->Cell(0, $h, $parametros[0]['valor'].' '.$meses[$mes].' '.$anio, 0, 1, 'C');
+
+        $pdf->Ln(2);
+
+        
+        $pdf->setFontSize($size2);
+        $pdf->Cell(7, $h3, encoding('N°'),1,0,'C',1);
+        $pdf->Cell(75, $h3, 'Nombres',1,0,'C',1);
+
+        $x = $pdf->GetX();
+
+        foreach ($diasMes as $i => $dia) {
+            $pdf->Cell($w, $h3/2, $i,1,0,'C',1);
+        }
+
+        $y = $pdf->getY();
+        $pdf->Ln();
+        
+        $pdf->SetLeftMargin(92);
+        $pdf->setY($y+$h3/2);
+        foreach ($diasMes as $i => $dia) {
+            $pdf->Cell($w, $h3/2, $dia['inicial'],1,0,'C',1);
+        }
+        $pdf->SetLeftMargin(10);
+        $pdf->setFont('Courier','', $size2);
+        $pdf->Ln();
     }
 
     function generalXls(Request $request){

@@ -166,8 +166,18 @@ class CustomPdf extends Fpdf
         $this->Text($x,$y,$txt);
         $this->Rotate(0);
     }
+
     function setBold($type) : void {
         $this->setFont('', ($type ? 'B' : ''));
+    }
+    function setTextColorType($type = "") : void {
+        if($type == "primary"){
+            $this->SetTextColor(115,103,240);
+        }else if($type == 'danger'){
+            $this->SetTextColor(234,84,85);
+        }else{
+            $this->SetTextColor(0,0,0);
+        }
     }
 }
 ?>
