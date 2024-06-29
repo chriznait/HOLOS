@@ -344,13 +344,13 @@ class RolController extends Controller
             $pdf->setBold(true);
             $pdf->setFontSize($size2);
             $pdf->setTextColorType("danger");
-            $pdf->Cell(0, $h2, encoding($dep->descripcion),1,1,'C');
+            $pdf->Cell(0, $h+2, encoding($dep->descripcion),1,1,'C');
             $pdf->setBold(false);
             foreach ($dep->servicios as $serv) {
                 $pdf->setBold(true);
                 $pdf->setTextColorType("primary");
                 $pdf->setFontSize($size2);
-                $pdf->Cell(0, $h, encoding($serv->descripcion),1,1);
+                $pdf->Cell(0, $h+1, encoding($serv->descripcion),1,1);
                 $pdf->setBold(false);
 
                 $pdf->setTextColorType();
