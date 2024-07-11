@@ -1,0 +1,23 @@
+
+*{
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+#video{
+	width: 100%;
+	height: 80vh;
+	background: #000;
+}
+footer{
+	width: 100%;
+	height: 20vh;
+	background: #000;
+}
+marquee{
+	font-weight: bold;
+	font-family: ARIAL;
+	font-size:10em;
+	color: #fff;
+	padding-top: 5px;
+}

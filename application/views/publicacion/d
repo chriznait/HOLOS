@@ -1,0 +1,477 @@
+
+
+
+
+UPDATE otm_registro SET 
+fecha='2020-12-01',
+fechaSolicita = concat('2020-12-01', time(fechaSolicita)),
+fechsmpmnicio = concat('2020-12-01', time(fechsmpmnicio)),
+fechaFin = concat('2020-12-01', time(fechaFin)),
+fechaJefeArea = concat('2020-12-01', time(fechaJefeArea)),
+fechaJefeMantenimiento = concat('2020-12-01', time(fechaJefeMantenimiento)),
+fechaHora = concat('2020-12-01', time(fechaHora)),
+actualizacion = concat('2020-12-01', time(actualizacion)),
+
+where idRegistro=2660 
+
+
+UPDATE otm_registro SET 
+fecha='2020-12-01',
+fechaSolicita = concat('2020-12-01', time(fechaSolicita)),
+fechsmpmnicio = concat('2020-12-01', time(fechsmpmnicio)),
+fechaFin = concat('2020-12-01', time(fechaFin)),
+
+
+fechaHora = concat('2020-12-01', time(fechaHora))
+
+
+where numero=2550
+
+
+25852586
+2587
+2588
+2589
+2590
+2591
+2592
+2593
+2594
+2595
+2596
+2597
+2598
+2599
+2600
+2601
+2602
+2603
+2604
+2606
+2607
+2608
+2609
+2610
+2611
+2612
+2613
+2614
+2615
+2616
+
+
+
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2664; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2665; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2666; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2667; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2668; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2669; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2670; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2671; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2672; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2673; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2674; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2675; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1083',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2676; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2677; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2678; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2679; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2680; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2681; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2682; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2683; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2684; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2685; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2686; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2687; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2688; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1082',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2689; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2690; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2691; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2692; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2693; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2694; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2695; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2696; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2697; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2698; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2699; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-20',ore1.fechaFin='2020-12-20'
+ where or1.numero=2700; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2822; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2823; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2824; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2825; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2826; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2827; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2828; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2829; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2830; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2831; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2832; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2833; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2834; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2835; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2836; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2837; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2838; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2839; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2840; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2841; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2842; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2843; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2844; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2845; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2846; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2847; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2848; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2849; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2850; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2851; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-23',ore1.fechaFin='2020-12-23'
+ where or1.numero=2852; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2752; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2753; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2754; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2755; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2756; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2757; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2758; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2759; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2760; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2761; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2762; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1078',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2763; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2764; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2765; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2766; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2767; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2768; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2769; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2770; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2771; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2772; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2773; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2774; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1077',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2775; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2776; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2777; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2778; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2779; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2780; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2781; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2782; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2783; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2784; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2785; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1076',ore1.fecha='2020-12-21',ore1.fechaFin='2020-12-21'
+ where or1.numero=2786; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2787; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2788; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2789; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2790; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2791; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2792; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2793; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2794; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2795; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2796; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2797; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1079',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2798; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2799; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2800; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2801; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2802; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2803; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2804; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2805; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2806; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2807; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2808; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2809; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1080',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2810; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2811; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2812; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2813; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2814; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2815; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2816; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2817; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2818; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2819; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2820; 
+ update `otm_registro_encargado` ore1 INNER JOIN otm_registro or1 ON ore1.idOtm=or1.idRegistro set 
+ore1.idPersonal='1081',ore1.fecha='2020-12-22',ore1.fechaFin='2020-12-22'
+ where or1.numero=2821; 
