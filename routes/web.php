@@ -12,6 +12,7 @@ use App\Livewire\Permiso\FormSolicitud;
 use App\Livewire\Permiso\MisPermisos;
 use App\Livewire\Permiso\Solicitud;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Cie10\Cie10;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::get('/', function () {
 }); */
 
 Route::get('permiso/solicita', FormSolicitud::class)->name('permiso.solicita');
+Route::get('cie10', Cie10::class)->name('cie10');
 
 Route::group(['middleware'=> 'auth'],function() {
     Route::get('perfil', Perfil::class)->name('perfil');
