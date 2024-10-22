@@ -42,6 +42,7 @@
                                         <li class="nav-item" role="presentation"><a class="nav-link" href="permiso/solicita"><img src="{{asset('img/permiso.jpg')}}" alt="" width="180" height="180"/><span>PERMISO</span></a></li>
                                         <li class="nav-item" role="presentation"><a class="nav-link" href="anexo" ><img src="{{('img/anexos.jpg')}}" alt="" width="180" height="180"/><span>ANEXOS</span></a></li>
                                         <li class="nav-item" role="presentation"><a class="nav-link" href="{{route('cie10')}}" ><img src="{{('img/cie10black.jpg')}}" alt="" width="180" height="180"/><span>CIE 10</span></a></li>
+                                        <li class="nav-item" role="presentation"><a class="nav-link" href="" ><img src="{{('img/permiso.jpg')}}" alt="" width="180" height="180"/><span>CODIGO SIGA</span></a></li>
                                         <li class="nav-item" role="presentation"><a class="nav-link" href="http://192.168.200.11/" target="_blank"><img src="{{('img/visorrx.jpg')}}" alt="" width="180" height="180"/><span>VISOR RX</span></a></li>
                                     </ul>
                                 </div>

@@ -46,4 +46,5 @@ class Empleado extends Model
     public function contrato() : HasOne {
         return $this->hasOne(TipoContrato::class, 'id', 'tipoContratoId');
     }
+    
 }

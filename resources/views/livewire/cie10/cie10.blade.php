@@ -4,18 +4,14 @@
     </x-slot>
 
     <div class="row" id="basic-table">
-            <div class="col-12">
+            <div class="col-sm--12">
                 <div class="card">
                     <div class="card-header">
-                        <!--<div class="col-xl-4 col-md-6 col-12">-->
-                        <div class="row">
-                            
-                            <div class="col-md-12" >
-                        <!--<div class="col-xl-4 col-md-6 col-12">-->
-                                <label class="form-label" for="basicInput"><p>Buscar Descripción</p></label>
-                                <input type="text" class="form-control" id="basicInput" placeholder="Buscar..." wire:model.live.debounce.500ms="search">
+                            <div class="form-group" >
+                        
+                                <label class="form-label" ><p>Buscar Descripción</p></label>
+                                <input type="text" class="form-control w-full" id="basicInput" placeholder="Buscar..." wire:model.live.debounce.500ms="search" >
                             </div>
-                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -42,5 +38,5 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </x-content-body>
+    </div>
+</x-content-body>

@@ -21,6 +21,7 @@ class Solicitud extends Component
     function mount(Request $request) : void {
         $this->search = "";
         $this->crud = $request->attributes->get('permisos');
+        //dd($this->crud);
     }
 
     function setEstado($id, $estado) : void {
@@ -56,9 +57,7 @@ class Solicitud extends Component
         if (count(array_intersect($permisosIds, [1,2,3,4])) > 0) {
             $permisos = Permiso::with('empleado', 'departamento','servicio', 'tipo')
                                 ->orderBy('id', 'desc')
-                                ->whereHas('empleado', function($e) use ($user, $empleado){
-                                    $e->search($this->search);
-                                })
+                                
                                 ->when(!$user->hasPermissionTo(3) && $user->hasPermissionTo(2), function($q) use ($empleado){
                                     $q->where('departamentoId', $empleado->departamentoId);
                                 })

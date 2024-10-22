@@ -7,6 +7,7 @@ use App\Models\Parametros;
 use App\Models\Rol;
 use App\Models\RolDetalle;
 use App\Models\Turno;
+use App\Models\Empleado;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\Attributes\On;
@@ -22,6 +23,7 @@ class DetalleRol extends Component
     public $crud;
     public $turnosExistentes;
     public $fechaLimite;
+    public $idDepartamentoUsuario;
 
     function mount(Request $request) : void {
         $this->tituloModalEstado    = "Actualiza estado";
@@ -31,12 +33,15 @@ class DetalleRol extends Component
         $this->turnos               = Turno::all();
         $this->turnosExistentes     = [];
         $this->crud                 = $request->attributes->get('permisos');
-
+        //dd($this->crud);
+        //$this->idServicioUsuario    = '';
         $this->tituloModal          = "Detalle Rol";
         $this->idModal              = "mdl-rol-detalle";
         $this->rol                  = new Rol();
+
         $this->diasMes              = [];
         $this->reseteaRolDetalle();
+        //dd($this->idServicioUsuario);
     }
     function asignaFechaLimite() : void {
         $parametro = Parametros::find(4); //id de parametro de dias maximo para rol
@@ -65,8 +70,12 @@ class DetalleRol extends Component
         $this->rol = Rol::with('empleados.detalles.rTurno')->find($id);
         $this->rol->respetaFechaLimite = $this->rol->respetaFechaLimite == 1 ? true : false;
         $this->diasMes = getDiasMes($this->rol->anio, $this->rol->mes);
+        //dd($this->rol->servicio?->id);
         $this->asignaFechaLimite();
         $this->turnosExistentes($id);
+        //$this->idRol 
+        $this->idDepartamentoUsuario = Empleado::find(session()->get('empleadoId'))->departamentoId;
+        //dd($this->idServicioUsuario);
     }
     #[On('muestraDetalle')]
     function mostrarDetalle($id) : void {

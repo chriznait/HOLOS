@@ -18,4 +18,7 @@ class Servicio extends Model
     function roles() : HasMany {
         return $this->hasMany(Rol::class, 'servicioId');
     }
+    function anexosTelefonicos() : HasMany {
+        return $this->hasMany(AnexoTelefonico::class, 'idServicio');
+    }
 }

@@ -86,13 +86,23 @@
                         <i class="fa-solid fa-file-arrow-down"></i>
                         Descargar formato
                     </button>
-                    <button class="btn btn-flat-dark" 
-                        {{-- wire:click="$dispatchTo('rol.subir-rol', 'muestraSubirRol', { id: {{ $rol->id }} })" --}}
-                        wire:click="muestraSubirRol"
-                    >
-                        <i class="fa-solid fa-file-arrow-up"></i>
-                        Subir Formato
-                    </button>
+                    
+                    @if($rol->departamento?->id == $idDepartamentoUsuario)
+                        <button class="btn btn-flat-dark" 
+                            {{-- wire:click="$dispatchTo('rol.subir-rol', 'muestraSubirRol', { id: {{ $rol->id }} })" --}}
+                            wire:click="muestraSubirRol"
+                        >
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                            Subir Formato
+                        </button>
+                    @endif
+                    @hasanyrole('Administrador|Jefe Servicio|')
+                        
+                        <button class="btn btn-flat-dark" wire:click="muestraSubirRol">
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                            Subir Formato
+                        </button>
+                    @endhasanyrole
                 @endif
             </div>
             <div class="table-responsive">
@@ -149,7 +159,9 @@
                                             }
                                         }
                                     @endphp
-                                    @if ($rol->estadoId != 2)
+                                    
+                                    @hasanyrole('Jefe departamento')
+                                    @if ($rol->estadoId != 2 && $rol->departamento?->id == $idDepartamentoUsuario )
                                         <td wire:click="muestraModalTurno({{ $rolEmpleadoId }}, '{{ $turno }}', {{ $dia }})" class="hcent turno">
                                             {{ $turno }}
                                         </td>
@@ -158,6 +170,12 @@
                                             {{ $turno }}
                                         </td>
                                     @endif
+                                    @endhasanyrole
+                                    @hasanyrole('Administrador')
+                                        <td wire:click="muestraModalTurno({{ $rolEmpleadoId }}, '{{ $turno }}', {{ $dia }})" class="hcent turno">
+                                            {{ $turno }}
+                                        </td>
+                                    @endhasanyrole
                                 @endforeach
                                 @hasanyrole('Administrador|Jefe Servicio|Jefe departamento|Recursos Humanos')
                                     @foreach ($turnosExistentes as $turnoe)
